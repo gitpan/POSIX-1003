@@ -1,0 +1,66 @@
+=head1 NAME
+
+POSIX::1003::Properties - POSIX access to _POSIX_ constants
+
+=head1 INHERITANCE
+
+ POSIX::1003::Properties
+   is a POSIX::1003
+
+=head1 SYNOPSIS
+
+  use POSIX::1003::Properties;     # import all
+
+  use POSIX::1003::Properties 'property';
+  $hasnt = property('_POSIX_NO_TRUNC');
+
+  use POSIX::1003::Properties '_POSIX_NO_TRUNC';
+  $hasnt = _POSIX_NO_TRUNC;
+
+  use POSIX::1003::Properties '%property';
+  my $key = $property{_POSIX_NO_TRUNC};
+  $property{_POSIX_NEW} = $value;
+
+  foreach my $prop (property_names) ...
+
+=head1 FUNCTIONS
+
+=head2 Standard POSIX
+
+There is no system call to retrieve these values: they are defined
+in the C sources only.
+
+=head2 Additional
+
+=over 4
+
+=item B<property>(NAME)
+
+Returns the property value related to NAME.
+
+=item B<property_names>()
+
+Returns a list with all known names, unsorted.
+
+=back
+
+=head1 CONSTANTS
+
+The exported variable C<%property> is a HASH which contains the
+values related to the names.
+
+=head1 SEE ALSO
+
+This module is part of POSIX-1003 distribution version 0.02,
+built on December 19, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+is released with Perl itself.
+
+=head1 COPYRIGHTS
+
+Copyrights of the perl code and the related documentation by
+2011 by Mark Overmeer. For other contributors see ChangeLog.
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+See F<http://www.perl.com/perl/misc/Artistic.html>
+

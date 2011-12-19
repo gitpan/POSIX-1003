@@ -1,0 +1,54 @@
+# Copyrights 2011 by Mark Overmeer.
+#  For other contributors see ChangeLog.
+# See the manual pages for details on the licensing terms.
+# Pod stripped from pm file by OODoc 2.00.
+use warnings;
+use strict;
+
+package POSIX::1003::Properties;
+use vars '$VERSION';
+$VERSION = '0.02';
+
+use base 'POSIX::1003';
+
+use Carp 'croak';
+
+my @constants;
+my @functions = qw/property property_names/;
+
+our %EXPORT_TAGS =
+  ( constants => \@constants
+  , functions => \@functions
+  , table     => [ '%property' ]
+  );
+
+my  $property;
+our %property;
+
+BEGIN {
+    # initialize the :constants export tag
+    $property = property_table;
+    push @constants, keys %$property;
+    tie %property, 'POSIX::1003::ReadOnlyTable', $property;
+}
+
+
+sub property($)
+{   my $key = shift // return;
+    $key =~ /^_POSIX_/
+        or croak "pass the constant name as string";
+
+    $property->{$key};
+}
+
+sub _create_constant($)
+{   my ($class, $name) = @_;
+    my $value = $property->{$name};
+    sub() {$value};
+}
+
+
+sub property_names() { keys %$property }
+
+
+1;
