@@ -12,6 +12,10 @@ POSIX::1003::FileSystem - POSIX for the file-system
   use POSIX::1003::FileSystem qw(access R_OK);
   if(access($fn, R_OK)) # $fn is readible?
 
+  use POSIX::1003::FileSystem qw(mkfifo);
+  use Fcntl ':mode';
+  mkfifo($path, S_IRUSR|S_IWUSR) or die $!;
+
 =head1 DESCRIPTION
 
 You may also need L<POSIX::1003::Pathconf|POSIX::1003::Pathconf>.
@@ -48,6 +52,15 @@ B<Warning>, POSIX uses different parameter order:
 
 =item B<mkfifo>(FILENAME, MODE)
 
+=item B<utime>(ATIME, MTIME, FILENAMES)
+
+Simply C<CORE::utime()>
+
+B<Warning,> POSIX uses different parameter order:
+
+  POSIX::utime($filename, $atime, $mtime);
+  CORE::utime($atime, $mtime, @filenames);
+
 =back
 
 =head1 CONSTANTS
@@ -77,7 +90,7 @@ To be used with L<access()|POSIX::1003::FileSystem/"Standard POSIX">
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.03,
+This module is part of POSIX-1003 distribution version 0.04,
 built on December 22, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 

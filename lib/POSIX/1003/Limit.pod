@@ -1,6 +1,6 @@
 =head1 NAME
 
-POSIX::1003::Limit - POSIX access to ulimit()
+POSIX::1003::Limit - POSIX access to ulimit and rlimit
 
 =head1 INHERITANCE
 
@@ -15,15 +15,15 @@ POSIX::1003::Limit - POSIX access to ulimit()
 
   use POSIX::1003::Limit qw(ulimit);
   # keys are strings!
-  $size = ulimit('UL_GET');
+  $size = ulimit('UL_GETFSIZE');
 
   use POSIX::1003::Limit qw(ulimit UL_GETFSIZE);
-  $ticks  = UL_GETFSIZE;   # constants are subs
+  $size = UL_GETFSIZE;   # constants are subs
 
   use POSIX::1003::Limit '%ulimit';
   my $key = $ulimit{UL_GETFSIZE};
   $ulimit{_SC_NEW_KEY} = $key_code;
-  $ticks  = ulimit($key);
+  $size = ulimit($key);
 
   print "$_\n" for keys %ulimit;
 
@@ -54,8 +54,6 @@ by C<rlimit()> hence provides a very limited set of features.
 
 =item B<getrlimit>(RESOURCE)
 
-example: 
-
   my ($cur, $max, $success) = getrlimit('RLIMIT_CORE');
   my ($cur, $max) = getrlimit('RLIMIT_CORE');
 
@@ -68,8 +66,6 @@ example:
 Returns the ulimit value related to the NAMEd constant.  The NAME
 must be a string. C<undef> will be returned when the NAME is not
 known by the system.
-
-example: 
 
   my $filesize = ulimit('UL_GETFSIZE') || SSIZE_MAX;
 
@@ -96,13 +92,18 @@ Returns a list with all known names, unsorted.
 =item B<%ulimit>
 
 This exported variable is a tied HASH which maps C<UL_*> names
-on unique numbers, to be used with the system's C<ulimit()> function.
+on unique numbers, to be used with L<ulimit()|POSIX::1003::Limit/"Standard POSIX">.
+
+=item B<%rlimit>
+
+This exported variable is a tied HASH which maps C<RLIMIT_*> names
+on unique numbers, to be used with L<getrlimit()|POSIX::1003::Limit/"Standard POSIX"> and L<setrlimit()|POSIX::1003::Limit/"Standard POSIX">.
 
 =back
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.03,
+This module is part of POSIX-1003 distribution version 0.04,
 built on December 22, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 

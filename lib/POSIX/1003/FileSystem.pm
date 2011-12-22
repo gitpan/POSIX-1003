@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::FileSystem;
 use vars '$VERSION';
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 use base 'POSIX::1003';
 
@@ -22,14 +22,17 @@ my @constants = qw/
 
 # POSIX.xs defines L_ctermid L_cuserid L_tmpname: useless!
 
-# Blocks resp from sys/stat.h, unistd.h
+# Blocks resp from sys/stat.h, unistd.h, utime.h
 my @functions = qw/
  mkfifo
 
  access lchown
+
+ utime
  /;
 
-our @EXPORT_OK   = (@constants, @functions);
+our @IN_CORE     = qw(utime);
+
 our %EXPORT_TAGS =
  ( constants => \@constants
  , functions => \@functions
@@ -42,5 +45,6 @@ sub lchown($$@)
     POSIX::lchown($uid, $gid, $_) && $successes++ for @_;
     $successes;
 }
+
 
 1;
