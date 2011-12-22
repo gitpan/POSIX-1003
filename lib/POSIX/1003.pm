@@ -7,10 +7,10 @@ use warnings;
 
 package POSIX::1003;
 use vars '$VERSION';
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 use Carp 'croak';
 
 { use XSLoader;
@@ -63,18 +63,22 @@ sub import(@)
         {   # reuse the already created function; might also be a function
             # which is actually implemented in the $class namespace.
         }
-        elsif( $f =~ m/^_(SC|CS|PC|POSIX)_/ )
+        elsif( $f =~ m/^(_SC|_CS|_PC|_POSIX|UL|RLIMIT)_/ )
         {   $export = $class->_create_constant($f);
         }
         elsif( $f !~ m/[^A-Z0-9_]/ )  # faster than: $f =~ m!^[A-Z0-9_]+$!
         {   # other all-caps names are always from POSIX.xs
-            exists $POSIX::{$f} && defined *{"POSIX::$f"}{CODE}
-                or croak "internal error: unknown POSIX constant $f";
-
-            # POSIX.xs croaks on undefined constants, we will return undef
-            my $const = eval "POSIX::$f()";
-            *{$class.'::'.$f} = $export
-              = defined $const ? sub {$const} : sub {undef};
+            if(exists $POSIX::{$f} && defined *{"POSIX::$f"}{CODE})
+            {   # POSIX.xs croaks on undefined constants, we will return undef
+                my $const = eval "POSIX::$f()";
+                *{$class.'::'.$f} = $export
+                  = defined $const ? sub() {$const} : sub() {undef};
+            }
+            else
+            {   # ignore the missing value
+#               warn "missing constant in POSIX.pm $f" && next;
+                *{$class.'::'.$f} = $export = sub() {undef};
+            }
         }
         elsif(exists $POSIX::{$f} && defined *{"POSIX::$f"}{CODE})
         {   # normal functions implemented in POSIX.xs
@@ -91,7 +95,6 @@ sub import(@)
         {   croak "unable to load $f";
         }
 
-#warn "${pkg}::$f = $export";
         no warnings 'once';
         *{"${pkg}::$f"} = $export;
     }
@@ -100,7 +103,7 @@ sub import(@)
 
 package POSIX::1003::ReadOnlyTable;
 use vars '$VERSION';
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 sub TIEHASH($) { bless $_[1], $_[0] }
 sub FETCH($)   { $_[0]->{$_[1]} }

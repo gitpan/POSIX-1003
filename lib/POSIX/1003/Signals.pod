@@ -9,17 +9,19 @@ POSIX::1003::Signals - POSIX using signals
 
 =head1 SYNOPSIS
 
-  use POSIX::1003::Signals ':functions';
+  use POSIX::1003::Signals qw(:functions SIGPOLL SIGHUP);
   sigaction($signal, $action, $oldaction);
   sigpending($sigset);
   sigprocmask($how, $sigset, $oldsigset)
   sigsuspend($signal_mask);
 
+  kill SIGPOLL//SIGHUP, $$;
+
 =head1 DESCRIPTION
 
 This manual page explains the access to the POSIX C<sigaction>
 functions and its relatives. This module uses two helper objects:
-L<POSIX::SigSet|POSIX::SigSet> and L<POSIX::1003::SigAction|POSIX::1003::SigAction>.
+L<POSIX::SigSet|POSIX::SigSet> and L<POSIX::SigAction|POSIX::SigAction>.
 
 =head1 FUNCTIONS
 
@@ -49,7 +51,7 @@ not a string (like "SIGHUP").  The  C<action> and C<oldaction> arguments
 are C<POSIX::SigAction> objects. Returns C<undef> on failure. 
 
 Consult your system's C<sigaction> manpage for details.
-See also C<POSIX::1003::SigRt>.
+See also C<POSIX::SigRt>.
 
 If you use the C<SA_SIGINFO flag>, the signal handler will in addition to
 the first argument (the signal name) also receive a second argument: a
@@ -102,7 +104,7 @@ Note that you can't reliably block or unblock a signal from its own signal
 handler if you're using safe signals. Other signals can be blocked or
 unblocked reliably.
 
-=item B<sigsuspend>()
+=item B<sigsuspend>(SIGSET)
 
 Install a signal mask and suspend process until signal arrives.
 This uses C<POSIX::SigSet> objects for the C<signal_mask> argument.
@@ -129,8 +131,8 @@ These functions are implemened in POSIX.xs
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.02,
-built on December 19, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.03,
+built on December 22, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

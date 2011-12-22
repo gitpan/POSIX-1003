@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Properties;
 use vars '$VERSION';
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 use base 'POSIX::1003';
 
@@ -35,7 +35,7 @@ BEGIN {
 
 sub property($)
 {   my $key = shift // return;
-    $key =~ /^_POSIX_/
+    $key =~ /^_POSIX/
         or croak "pass the constant name as string";
 
     $property->{$key};

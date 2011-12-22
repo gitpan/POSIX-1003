@@ -32,9 +32,15 @@ Use the C<*_OK> constants for FLAGS.
 Like C<chown()>, but does not follow symlinks when encountered. Returns
 the number of files successfully changed.
 
-B<Warning>, POSIX uses different parameter order
+B<Warning>, POSIX uses different parameter order:
 
-  my $successes = CORE::chown($uid, $gid, @filenames);
+  # POSIX specification:
+  # int lchown(const char *path, uid_t owner, gid_t group);
+
+  # Perl core implementation:
+  my $successes = chown($uid, $gid, @filenames);
+
+  use POSIX;
   POSIX::lchown($uid, $gid, $filename) or die $!;
 
   use POSIX::1003::FileSystem 'lchown';
@@ -49,6 +55,7 @@ B<Warning>, POSIX uses different parameter order
 =head2 Constants from unistd.h
 
 To be used with L<access()|POSIX::1003::FileSystem/"Standard POSIX">
+
  F_OK          File exists
  R_OK          is readable for me
  W_OK          is writable for mee
@@ -70,8 +77,8 @@ To be used with L<access()|POSIX::1003::FileSystem/"Standard POSIX">
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.02,
-built on December 19, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.03,
+built on December 22, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

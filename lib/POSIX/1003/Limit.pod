@@ -1,0 +1,117 @@
+=head1 NAME
+
+POSIX::1003::Limit - POSIX access to ulimit()
+
+=head1 INHERITANCE
+
+ POSIX::1003::Limit
+   is a POSIX::1003
+
+=head1 SYNOPSIS
+
+  # ULIMIT support
+
+  use POSIX::1003::Limit; # load all names
+
+  use POSIX::1003::Limit qw(ulimit);
+  # keys are strings!
+  $size = ulimit('UL_GET');
+
+  use POSIX::1003::Limit qw(ulimit UL_GETFSIZE);
+  $ticks  = UL_GETFSIZE;   # constants are subs
+
+  use POSIX::1003::Limit '%ulimit';
+  my $key = $ulimit{UL_GETFSIZE};
+  $ulimit{_SC_NEW_KEY} = $key_code;
+  $ticks  = ulimit($key);
+
+  print "$_\n" for keys %ulimit;
+
+  # RLIMIT support
+
+  use POSIX::1003::Limit ':rlimit';
+
+  my ($cur, $max, $success) = getrlimit('RLIMIT_CORE');
+  my ($cur, $max) = getrlimit('RLIMIT_CORE');
+  my $cur = RLIMIT_CORE;
+
+  my $success = setrlimit('RLIMIT_CORE', 1e6, 1e8);
+  setrlimit('RLIMIT_CORE', 1e6) or die;
+  setrlimit('RLIMIT_CORE', RLIM_SAVED_MAX, RLIM_INFINITY);
+  RLIMIT_CORE(1e6, 1e8);
+
+=head1 DESCRIPTION
+
+This module provides access to the "ulimit" (user limit) and "rlimit"
+(resource limit) handling.  On most systems, C<ulimit()> is succeeded
+by C<rlimit()> hence provides a very limited set of features.
+
+=head1 FUNCTIONS
+
+=head2 Standard POSIX
+
+=over 4
+
+=item B<getrlimit>(RESOURCE)
+
+example: 
+
+  my ($cur, $max, $success) = getrlimit('RLIMIT_CORE');
+  my ($cur, $max) = getrlimit('RLIMIT_CORE');
+
+=item B<setrlimit>(RESOURCE, CUR, [MAX])
+
+  my $success = setrlimit('RLIMIT_CORE', 1e6, 1e8);
+
+=item B<ulimit>(NAME)
+
+Returns the ulimit value related to the NAMEd constant.  The NAME
+must be a string. C<undef> will be returned when the NAME is not
+known by the system.
+
+example: 
+
+  my $filesize = ulimit('UL_GETFSIZE') || SSIZE_MAX;
+
+=back
+
+=head2 Additional
+
+=over 4
+
+=item B<rlimit_names>()
+
+Returns a list with all known resource names, unsorted.
+
+=item B<ulimit_names>()
+
+Returns a list with all known names, unsorted.
+
+=back
+
+=head1 CONSTANTS
+
+=over 4
+
+=item B<%ulimit>
+
+This exported variable is a tied HASH which maps C<UL_*> names
+on unique numbers, to be used with the system's C<ulimit()> function.
+
+=back
+
+=head1 SEE ALSO
+
+This module is part of POSIX-1003 distribution version 0.03,
+built on December 22, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+is released with Perl itself.
+
+=head1 COPYRIGHTS
+
+Copyrights of the perl code and the related documentation by
+2011 by Mark Overmeer. For other contributors see ChangeLog.
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+See F<http://www.perl.com/perl/misc/Artistic.html>
+

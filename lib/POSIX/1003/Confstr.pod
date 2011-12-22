@@ -51,13 +51,20 @@ Returns a list with all known names, unsorted.
 
 =head1 CONSTANTS
 
-The exported variable C<%confstr> is a HASH which maps C<_CS_*> names
-on unique numbers, to be used with the system's C<confstr()> function.
+=over 4
+
+=item B<%confstr>
+
+This exported variable is a (tied) HASH which maps C<_CS_*>
+names to the unique numbers to be used with the system's C<confstr()>
+function.
+
+=back
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.02,
-built on December 19, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.03,
+built on December 22, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

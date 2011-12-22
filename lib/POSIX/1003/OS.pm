@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::OS;
 use vars '$VERSION';
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 use base 'POSIX::1003';
 

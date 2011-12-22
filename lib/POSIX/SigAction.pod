@@ -1,11 +1,11 @@
 =head1 NAME
 
-POSIX::1003::SigAction - represent a struct sigaction
+POSIX::SigAction - represent a struct sigaction
 
 =head1 SYNOPSIS
 
   $sigset    = POSIX::SigSet->new(SIGINT, SIGQUIT);
-  $sigaction = POSIX::1003:SigAction
+  $sigaction = POSIX::SigAction
      ->new(\&handler, $sigset, SA_NOCLDSTOP);
 
   $sigset    = $sigaction->mask;
@@ -14,8 +14,12 @@ POSIX::1003::SigAction - represent a struct sigaction
 
 =head1 DESCRIPTION
 
-The C<POSIX::1003::SigAction> object corresponds to the C
-C<struct sigaction>, defined by C<signal.h>.
+The C<POSIX::SigAction> object corresponds to the C C<struct sigaction>,
+defined by C<signal.h>.
+
+This module is a bit tricky: POSIX.pm contains the same code for
+the C<POSIX::SigAction> namespace. However, we do not need POSIX.pm
+but only the POSIX.xs component which has the namespace hard-coded.
 
 =head1 METHODS
 
@@ -33,7 +37,7 @@ This object will be destroyed automatically when it is no longer needed.
 
 =back
 
-=head2 Other
+=head2 Accessors
 
 =over 4
 
@@ -50,12 +54,13 @@ Accessor functions to get/set the values of a SigAction object.
 Accessor function for the "safe signals" flag of a SigAction object; see
 L<perlipc> for general information on safe (a.k.a. "deferred") signals.  If
 you wish to handle a signal safely, use this accessor to set the "safe" flag
-in the C<POSIX::1003::SigAction> object:
+in the C<POSIX::SigAction> object:
 
    $sigaction->safe(1);
 
 You may also examine the "safe" flag on the output action object which is
-filled in when given as the third parameter to POSIX::1003 subroutine sigaction:
+filled in when given as the third parameter to
+L<POSIX::1003::Signals::sigaction()|POSIX::1003::Signals/"Standard POSIX">:
 
   sigaction(SIGINT, $new_action, $old_action);
   if ($old_action->safe) {
@@ -66,8 +71,8 @@ filled in when given as the third parameter to POSIX::1003 subroutine sigaction:
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.02,
-built on December 19, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.03,
+built on December 22, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

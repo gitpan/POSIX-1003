@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Signals;
 use vars '$VERSION';
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 use base 'POSIX::1003';
 
@@ -42,6 +42,10 @@ our @IN_CORE = qw/kill/;
 sub raise($) { CORE::kill $_[0], $$ }
 
 
-sub signal($$) { $SIG{$_[0]} = $_[1] }
+sub sigaction($$;$)   {goto &POSIX::sigaction }
+sub sigpending($)     {goto &POSIX::sigpending }
+sub sigprocmask($$;$) {goto &POSIX::sigprocmask }
+sub sigsuspend($)     {goto &POSIX::sigsuspend }
+sub signal($$)        { $SIG{$_[0]} = $_[1] }
 
 1;

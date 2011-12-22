@@ -7,14 +7,17 @@ POSIX::1003::Termios - POSIX general terminal interface
  POSIX::1003::Termios
    is a POSIX::1003
 
+ POSIX::1003::Termios
+   is a POSIX::Termios
+
 =head1 SYNOPSIS
 
-  use POSIX::Termios qw(:speed);
-  $termios = POSIX::Termios->new;
+  use POSIX::1003::Termios qw(:speed);
+  $termios = POSIX::1003::Termios->new;
   $ispeed = $termios->getispeed;
   $termios->setospeed(B9600);
 
-  use POSIX::Termios qw(:functions :actions);
+  use POSIX::1003::Termios qw(:functions :actions);
   tcsendbreak($fd, $duration);
   tcflush($fd, TCIFLUSH);
 
@@ -138,16 +141,37 @@ Set the c_oflag field of a termios object.
 Set the output baud rate.
   $termios->setospeed( B9600 );
 
-=item $obj-E<gt>B<ttyname>(FD)
+=back
+
+=head1 FUNCTIONS
+
+=over 4
+
+=item B<tcdrain>(FD)
+
+=item B<tcflow>(FD, ACTION)
+
+See the possible ACTION values in L</CONSTANTS>, import tag C<:action>
+
+=item B<tcflush>(FD, QUEUE)
+
+See the possible QUEUE values in L</CONSTANTS>, import tag C<:flush>
+
+=item B<tcsendbreak>(FD, DURATION)
+
+DURATION is system dependent.
+
+=item B<ttyname>(FD)
 
 Returns the path to the special device which relates to the file-descriptor.
 See also L<POSIX::1003::Proc::ctermid()|POSIX::1003::Proc/"Standard POSIX functions from unistd.h">
+
   $tty  = ttyname($fd);
   $tty  = ttyname($fh->fileno);
 
 =back
 
-=head2 Constants
+=head1 CONSTANTS
 
 =over 4
 
@@ -158,8 +182,11 @@ See also L<POSIX::1003::Proc::ctermid()|POSIX::1003::Proc/"Standard POSIX functi
 
 =item Interface values (getattr and setattr), export tag C<:actions>.
 
-  TCSADRAIN TCSANOW TCOON TCIOFLUSH TCOFLUSH TCION TCIFLUSH
-  TCSAFLUSH TCIOFF TCOOFF
+  TCSADRAIN TCSANOW TCOON TCION TCSAFLUSH TCIOFF TCOOFF
+
+=item To be used as L<tcflush()|POSIX::1003::Termios/"FUNCTIONS"> parameter QUEUE
+
+  TCIOFLUSH TCOFLUSH TCIFLUSH
 
 =item c_cc field values, export tag C<:flags> as have all following constants.
 
@@ -187,8 +214,8 @@ See also L<POSIX::1003::Proc::ctermid()|POSIX::1003::Proc/"Standard POSIX functi
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.02,
-built on December 19, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.03,
+built on December 22, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

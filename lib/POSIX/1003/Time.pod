@@ -45,9 +45,11 @@ not 1.  The year (C<year>) is given in years since 1900.  I.e., the year
 
 The C<asctime> function uses C<strftime> with a fixed format, to produce
 timestamps with a trailing new-line.  Example:
+
   "Sun Sep 16 01:03:52 1973\n"
 
-The parameter order is the same as for L<strftime()|POSIX::1003::Time/"Standard POSIX"> without the C<$fmt>.
+The parameter order is the same as for L<strftime()|POSIX::1003::Time/"Standard POSIX"> without the C<$fmt>:
+
   my $str = asctime($sec, $min, $hour, $mday, $mon, $year,
                  $wday, $yday, $isdst);
 
@@ -127,8 +129,8 @@ Set-up local timezone from C<$ENV{TZ}> and the OS.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.02,
-built on December 19, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.03,
+built on December 22, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

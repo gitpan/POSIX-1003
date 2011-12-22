@@ -14,6 +14,8 @@ lib/POSIX/1003/FdIO.pm
 lib/POSIX/1003/FdIO.pod
 lib/POSIX/1003/FileSystem.pm
 lib/POSIX/1003/FileSystem.pod
+lib/POSIX/1003/Limit.pm
+lib/POSIX/1003/Limit.pod
 lib/POSIX/1003/Locale.pm
 lib/POSIX/1003/Locale.pod
 lib/POSIX/1003/Math.pm
@@ -26,8 +28,6 @@ lib/POSIX/1003/Proc.pm
 lib/POSIX/1003/Proc.pod
 lib/POSIX/1003/Properties.pm
 lib/POSIX/1003/Properties.pod
-lib/POSIX/1003/SigAction.pm
-lib/POSIX/1003/SigAction.pod
 lib/POSIX/1003/Signals.pm
 lib/POSIX/1003/Signals.pod
 lib/POSIX/1003/Sysconf.pm
@@ -37,8 +37,17 @@ lib/POSIX/1003/Termios.pod
 lib/POSIX/1003/Time.pm
 lib/POSIX/1003/Time.pod
 lib/POSIX/Overview.pod
+lib/POSIX/SigAction.pm
+lib/POSIX/SigAction.pod
 lib/POSIX/SigSet.pm
 lib/POSIX/SigSet.pod
+lists/confstr.txt
+lists/pathconf.txt
+lists/posix.txt
+lists/rlimit.txt
+lists/sysconf.txt
+lists/ulimit.txt
+system/linux.c
 t/01use.t
 t/20math.t
 t/21fdio.t
@@ -47,8 +56,12 @@ t/23locale.t
 t/24os.t
 t/25proc.t
 t/26time.t
+t/30sigaction.t
+t/31termios.t
 t/60sysconf.t
 t/61confstr.t
 t/62pathconf.t
 t/63properties.t
+t/64ulimit.t
+t/65rlimit.t
 META.yml                                 Module meta-data (added by MakeMaker)

@@ -7,9 +7,9 @@ use strict;
 
 package POSIX::1003::Termios;
 use vars '$VERSION';
-$VERSION = '0.02';
+$VERSION = '0.03';
 
-use base 'POSIX::1003';
+use base 'POSIX::1003', 'POSIX::Termios';
 
 my @speed = qw/
  B0 B110 B1200 B134 B150 B1800 B19200 B200 B2400
@@ -24,13 +24,12 @@ my @flags   = qw/
  /;
 
 my @actions = qw/
- TCSADRAIN TCSANOW TCOON TCIOFLUSH TCOFLUSH TCION TCIFLUSH
- TCSAFLUSH TCIOFF TCOOFF
+ TCSADRAIN TCSANOW TCOON TCION TCSAFLUSH TCIOFF TCOOFF
  /;
 
+my @flush     = qw/TCIOFLUSH TCOFLUSH TCIFLUSH/;
 my @functions = qw/
- cfgetispeed cfgetospeed cfsetispeed cfsetospeed
- tcdrain tcflow tcflush tcgetattr tcsendbreak tcsetattr
+ tcdrain tcflow tcflush tcsendbreak 
  ttyname
  /;
 
@@ -38,7 +37,8 @@ our %EXPORT_TAGS =
  ( speed     => \@speed
  , flags     => \@flags
  , actions   => \@actions
- , constants => [@speed, @flags, @actions]
+ , flush     => \@flush
+ , constants => [@speed, @flags, @actions, @flush]
  , functions => \@functions
  );
 

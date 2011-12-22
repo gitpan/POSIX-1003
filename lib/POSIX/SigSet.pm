@@ -4,11 +4,8 @@
 # Pod stripped from pm file by OODoc 2.00.
 use warnings;
 use strict;
-
-package POSIX::SigSet;
-use vars '$VERSION';
-$VERSION = '0.02';
-
 # Implemented in XS
+
+
 
 1;
