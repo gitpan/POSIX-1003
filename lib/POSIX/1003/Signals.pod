@@ -19,6 +19,8 @@ POSIX::1003::Signals - POSIX using signals
 
 =head1 DESCRIPTION
 
+=head2 Exporter
+
 This manual page explains the access to the POSIX C<sigaction>
 functions and its relatives. This module uses two helper objects:
 L<POSIX::SigSet|POSIX::SigSet> and L<POSIX::SigAction|POSIX::SigAction>.
@@ -131,8 +133,8 @@ These functions are implemened in POSIX.xs
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.04,
-built on December 22, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.05,
+built on December 23, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

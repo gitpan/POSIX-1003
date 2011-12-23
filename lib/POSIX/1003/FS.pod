@@ -1,0 +1,107 @@
+=head1 NAME
+
+POSIX::1003::FS - POSIX for the file-system
+
+=head1 INHERITANCE
+
+ POSIX::1003::FS
+   is a POSIX::1003
+
+=head1 SYNOPSIS
+
+  use POSIX::1003::FS qw(access R_OK);
+  if(access($fn, R_OK)) # $fn is readible?
+
+  use POSIX::1003::FS qw(mkfifo);
+  use Fcntl ':mode';
+  mkfifo($path, S_IRUSR|S_IWUSR) or die $!;
+
+=head1 DESCRIPTION
+
+=head2 Exporter
+
+You may also need L<POSIX::1003::Pathconf|POSIX::1003::Pathconf>.
+
+=head1 FUNCTIONS
+
+=head2 Standard POSIX
+
+=over 4
+
+=item B<access>(FILENAME, FLAGS)
+
+Read C<man filetest> before you start using this function!
+Use the C<*_OK> constants for FLAGS.
+
+=item B<lchown>(UID, GID, FILENAMES)
+
+Like C<chown()>, but does not follow symlinks when encountered. Returns
+the number of files successfully changed.
+
+B<Warning>, POSIX uses different parameter order:
+
+  # POSIX specification:
+  # int lchown(const char *path, uid_t owner, gid_t group);
+
+  # Perl core implementation:
+  my $successes = chown($uid, $gid, @filenames);
+
+  use POSIX;
+  POSIX::lchown($uid, $gid, $filename) or die $!;
+
+  use POSIX::1003::FS 'lchown';
+  my @successes = lchown($uid, $gid, @filenames);
+
+=item B<mkfifo>(FILENAME, MODE)
+
+=item B<utime>(ATIME, MTIME, FILENAMES)
+
+Simply C<CORE::utime()>
+
+B<Warning,> POSIX uses different parameter order:
+
+  POSIX::utime($filename, $atime, $mtime);
+  CORE::utime($atime, $mtime, @filenames);
+
+=back
+
+=head1 CONSTANTS
+
+=head2 Constants from unistd.h
+
+To be used with L<access()|POSIX::1003::FS/"Standard POSIX">
+
+ F_OK          File exists
+ R_OK          is readable for me
+ W_OK          is writable for mee
+ X_OK          is executable for me
+
+=head2 Constants from limits.h
+
+ FILENAME_MAX  Maximum length of a filename
+
+=head2 Constants from stdio.h
+
+ LINK_MAX      Maximum number of hard-links
+ MAX_CANON
+ NAME_MAX
+ PATH_MAX
+ TMP_MAX       The minimum number of unique filenames generated
+               by tmpnam (and tempnam when it uses tmpnam's name-
+               space), or tempnam (the two are separate).
+
+=head1 SEE ALSO
+
+This module is part of POSIX-1003 distribution version 0.05,
+built on December 23, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+is released with Perl itself.
+
+=head1 COPYRIGHTS
+
+Copyrights of the perl code and the related documentation by
+2011 by Mark Overmeer. For other contributors see ChangeLog.
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+See F<http://www.perl.com/perl/misc/Artistic.html>
+

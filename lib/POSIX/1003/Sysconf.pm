@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Sysconf;
 use vars '$VERSION';
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 use base 'POSIX::1003';
 
@@ -51,7 +51,6 @@ sub _create_constant($)
 
 
 sub sysconf_names() { keys %$sysconf }
-
 
 
 1;

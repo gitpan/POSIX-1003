@@ -30,6 +30,8 @@ POSIX::1003::FdIO - POSIX handling file descriptors
 
 =head1 DESCRIPTION
 
+=head2 Exporter
+
 Most people believe that the C<sys*> commands in Perl-Core are not
 capable of doing unbuffered IO. For those people, we have this module.
 Whether C<sysread()> or L<readfd()|POSIX::1003::FdIO/"Standard POSIX"> is meassurable faster cannot be
@@ -203,8 +205,8 @@ also be useful in non-buffered IO.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.04,
-built on December 22, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.05,
+built on December 23, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

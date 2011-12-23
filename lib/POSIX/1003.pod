@@ -6,8 +6,8 @@ POSIX::1003 - POSIX 1003.1 extensions to Perl
 
  POSIX::1003 is extended by
    POSIX::1003::Confstr
+   POSIX::1003::FS
    POSIX::1003::FdIO
-   POSIX::1003::FileSystem
    POSIX::1003::Limit
    POSIX::1003::Locale
    POSIX::1003::Math
@@ -23,9 +23,27 @@ POSIX::1003 - POSIX 1003.1 extensions to Perl
 =head1 SYNOPSIS
 
    # use the specific extensions
-   # see POSIX::Overview
+   # and see POSIX::Overview and POSIX::3
 
 =head1 DESCRIPTION
+
+=head2 Exporter
+
+All modules provide a C<:constants> and a C<:functions> tag, sometimes
+more.  The default is C<:all>, which means: everthing. You may also
+specify C<:none> (of course: nothing).
+
+When the import list is preceeded by C<+1>, the symbols will get published
+into the namespace of the caller namespace.
+
+  use POSIX::1003::Pathconf;
+  use POSIX::1003::Pathconf ':all';  # same
+  use POSIX::3 ':pc';                # same, for the lazy
+  use POSIX::3 ':pathconf';          # same, less lazy
+
+  sub MyModule::import(@)   # your own tricky exporter
+  {   POSIX::1003::Pathconf->import('+1', @_);
+  }
 
 The POSIX module in I<core> (distributed with Perl itself) is ancient,
 the documentation is usually wrong, and it has too much unusable code in it.
@@ -56,7 +74,7 @@ Provide access to the C<_CS_*> constants.
 
 Provides unbuffered IO handling; based on file-descriptors.
 
-=item L<POSIX::1003::FileSystem|POSIX::1003::FileSystem>
+=item L<POSIX::1003::FS|POSIX::1003::FS>
 
 Some generic file-system information. See also L<POSIX::1003::Pathconf|POSIX::1003::Pathconf>
 for more precise info.
@@ -210,7 +228,7 @@ will return C<undef>.
 
 This simplifies code like this:
 
-  use POSIX::1003::FileSystem 'PATH_MAX';
+  use POSIX::1003::FS         'PATH_MAX';
   use POSIX::1003::PathConfig '_PC_PATH_MAX';
   my $max_fn = _PC_PATH_MAX($fn) // PATH_MAX // 1024;
 
@@ -221,8 +239,8 @@ of a constant.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.04,
-built on December 22, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.05,
+built on December 23, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

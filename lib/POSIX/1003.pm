@@ -7,10 +7,10 @@ use warnings;
 
 package POSIX::1003;
 use vars '$VERSION';
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 use Carp 'croak';
 
 { use XSLoader;
@@ -34,7 +34,10 @@ sub import(@)
     {   @{$ok}{@{$tags->{$_}}} = () for keys %$tags;
     }
 
-    @_ or @_ = ':all';
+    my $level = @_ && $_[0] =~ m/^\+(\d+)$/ ? shift : 0;
+    return if @_==1 && $_[0] eq ':none';
+    @_ = ':all' if !@_;
+
     my %take;
     foreach (@_)
     {   if( $_ eq ':all')
@@ -53,7 +56,7 @@ sub import(@)
 
     my $in_core = \@{$class.'::IN_CORE'} || [];
 
-    my $pkg = caller;
+    my $pkg = (caller $level)[0];
     foreach my $f (sort keys %take)
     {   my $export;
         exists ${$pkg.'::'}{$f} && *{$pkg.'::'.$f}{CODE}
@@ -103,7 +106,7 @@ sub import(@)
 
 package POSIX::1003::ReadOnlyTable;
 use vars '$VERSION';
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 sub TIEHASH($) { bless $_[1], $_[0] }
 sub FETCH($)   { $_[0]->{$_[1]} }

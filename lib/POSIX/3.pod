@@ -1,0 +1,103 @@
+=head1 NAME
+
+POSIX::3 - help POSIX::1003 modules
+
+=head1 SYNOPSIS
+
+  use POSIX::3 qw(:termios :pc PATH_MAX);
+  # is short for
+  use POSIX::1003::Termios  qw(:all);
+  use POSIX::1003::Pathconf qw(:all);
+  use POSIX::1003::FS       qw(PATH_MAX);
+
+  # overview about all exported symbols (by a module)
+  show_posix_names 'POSIX::1003::Pathconf';
+  show_posix_names ':pc';
+
+=head1 DESCRIPTION
+
+=head2 Exporter
+
+=head3 EXPORT_TAGS
+
+  :all                  (all symbols, default)
+  :cs      :confstr     POSIX::1003::Confstr
+  :ev      :events      POSIX::1003::Events
+  :fd      :fdio        POSIX::1003::FdIO
+  :fs      :filesystem  POSIX::1003::FS
+  :limit   :limits      POSIX::1003::Limit
+  :locale               POSIX::1003::Locale
+  :math                 POSIX::1003::Math
+  :none                 (nothing)
+  :os      :opsys       POSIX::1003::OS
+  :pc      :pathconf    POSIX::1003::Pathconf
+  :proc    :processes   POSIX::1003::Proc
+  :props   :properties  POSIX::1003::Properties
+  :sc      :sysconf     POSIX::1003::Sysconf
+  :signals              POSIX::1003::Signals
+  :signals :sigaction   POSIX::SigAction
+  :signals :sigset      POSIX::SigSet
+  :termio  :termios     POSIX::1003::Termios
+  :time                 POSIX::1003::Time
+
+This module uses nasty export tricks, so is not based in Exporter.
+Some modules have more than one tag related to them, and one tag may
+load multiple modules. When you do not specify symbol or tag, then B<all>
+are loaded into your namespace(!), the same behavior as POSIX has.
+
+If your import list starts with C<+1>, the symbols will not get into
+your own namespace, but that of your caller. Just like
+C<$Exporter::ExportLevel> (but a simpler syntax).
+
+  use POSIX::3 ':pathconf';
+  use POSIX::3 ':pc';       # same, abbreviated name
+
+  use POSIX::3 qw(PATH_MAX :math sin);
+
+  sub MyModule::import(@)   # your own tricky exporter
+  {   POSIX::3->import('+1', @_);
+  }
+
+The L<POSIX::1003|POSIX::1003> suite implements access to many POSIX functions. It
+can be quite some work to type-in all the explicit C<require> lines. This
+module is slower during the import (because it knows the location of each
+of the hundreds of symbols) but loads the right modules automatically.
+
+=head1 FUNCTIONS
+
+=over 4
+
+=item B<posix_1003_modules>()
+
+Returns the names of all modules in the current release of POSIX::1003.
+
+=item B<posix_1003_names>([MODULES|TAGS])
+
+Returns  all the names, when in LIST content.  In SCALAR context,
+it returns (a reference to) an HASH which contains exported names
+to modules mappings.  If no explicit MODULES are specified, then all
+available modules are taken.
+
+=item B<show_posix_names>([MODULES|TAGS])
+
+Print all names defined by the POSIX::1003 suite in alphabetical
+(case-insensitive) order. If no explicit MODULES are specified, then all
+available modules are taken.
+
+=back
+
+=head1 SEE ALSO
+
+This module is part of POSIX-1003 distribution version 0.05,
+built on December 23, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+is released with Perl itself.
+
+=head1 COPYRIGHTS
+
+Copyrights of the perl code and the related documentation by
+2011 by Mark Overmeer. For other contributors see ChangeLog.
+
+This program is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
+See F<http://www.perl.com/perl/misc/Artistic.html>
+

@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::OS;
 use vars '$VERSION';
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 use base 'POSIX::1003';
 
@@ -17,11 +17,8 @@ my @constants = qw/
  /;
 
 # Blocks resp from sys/utsname.h
-my @functions = qw/
- uname
- /;
+my @functions = qw/uname/;
 
-our @EXPORT_OK   = (@constants, @functions);
 our %EXPORT_TAGS =
  ( constants => \@constants
  , functions => \@functions

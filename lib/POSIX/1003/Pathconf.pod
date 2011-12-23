@@ -67,10 +67,24 @@ This exported variable is a tied HASH which maps C<_PC_*> names
 on unique numbers, to be used with the system's C<pathconf()>
 and C<fpathconf()> functions.
 
+The following constants where detected on your system when the
+module got installed.  The second column shows the value which
+where returned for a random file at the time.
+
+=back
+
+=for comment
+#TABLE_PATHCONF_START
+
+   If you install the module, the table will be filled-in here
+
+=for comment
+#TABLE_PATHCONF_END
+
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.04,
-built on December 22, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.05,
+built on December 23, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

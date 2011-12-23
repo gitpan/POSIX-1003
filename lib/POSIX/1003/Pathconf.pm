@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Pathconf;
 use vars '$VERSION';
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 use base 'POSIX::1003';
 
@@ -64,6 +64,3 @@ sub _create_constant($)
 
 sub pathconf_names() { keys %$pathconf }
 
-
-
-1;

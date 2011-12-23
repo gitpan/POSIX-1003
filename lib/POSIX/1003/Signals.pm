@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Signals;
 use vars '$VERSION';
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 use base 'POSIX::1003';
 

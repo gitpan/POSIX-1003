@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Locale;
 use vars '$VERSION';
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 use base 'POSIX::1003';
 
@@ -19,12 +19,8 @@ my @constants = qw/
   LC_TIME
  /;
 
-my @functions = qw/
- localeconv
- setlocale
- /;
+my @functions = qw/localeconv setlocale/;
 
-our @EXPORT_OK   = (@constants, @functions);
 our %EXPORT_TAGS =
   ( constants => \@constants
   , functions => \@functions
