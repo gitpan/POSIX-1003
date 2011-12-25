@@ -52,9 +52,6 @@ Detailed signal management.  The C<signal> must be a number (like SIGHUP),
 not a string (like "SIGHUP").  The  C<action> and C<oldaction> arguments
 are C<POSIX::SigAction> objects. Returns C<undef> on failure. 
 
-Consult your system's C<sigaction> manpage for details.
-See also C<POSIX::SigRt>.
-
 If you use the C<SA_SIGINFO flag>, the signal handler will in addition to
 the first argument (the signal name) also receive a second argument: a
 hash reference, inside which are the following keys with the following
@@ -118,23 +115,22 @@ These functions are implemened in POSIX.xs
 
 =head1 CONSTANTS
 
-=head2 Signal names
+The following constants are exported, shown here with the values
+discovered during installation of this module:
 
- SIGABRT SIGALRM SIGCHLD SIGCONT SIGFPE SIGHUP SIGILL SIGINT SIGKILL
- SIGPIPE SIGRTMIN SIGRTMAX SIGQUIT SIGSEGV SIGSTOP SIGTERM SIGTSTP
- SIGTTIN SIGTTOU SIGUSR1 SIGUSR2 SIGBUS SIGPOLL SIGPROF SIGSYS SIGTRAP
- SIGURG SIGVTALRM SIGXCPU SIGXFSZ SIG_BLOCK SIG_DFL SIG_ERR SIG_IGN
- SIG_SETMASK SIG_UNBLOCK
+=for comment
+#TABLE_SIGNALS_START
 
-=head2 Signals actions
+The constant names for this math module are inserted here during
+installation.
 
- SA_NOCLDSTOP SA_NOCLDWAIT SA_NODEFER SA_ONSTACK SA_RESETHAND
- SA_RESTART SA_SIGINFO
+=for comment
+#TABLE_SIGNALS_END
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.05,
-built on December 23, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.06,
+built on December 25, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

@@ -165,34 +165,22 @@ String to unsigned integer translation, which behaves like C<strtol>.
 
 =head1 CONSTANTS
 
-=head2 Math constants from float.h or limits.h
+The following constants are exported, shown here with the values
+discovered during installation of this module:
 
- DBL_DIG DBL_EPSILON DBL_MANT_DIG DBL_MAX DBL_MAX_10_EXP
- DBL_MAX_EXP DBL_MIN DBL_MIN_10_EXP DBL_MIN_EXP FLT_DIG
- FLT_EPSILON FLT_MANT_DIG FLT_MAX FLT_MAX_10_EXP FLT_MAX_EXP
- FLT_MIN FLT_MIN_10_EXP FLT_MIN_EXP FLT_RADIX FLT_ROUNDS
- LDBL_DIG LDBL_EPSILON LDBL_MANT_DIG LDBL_MAX LDBL_MAX_10_EXP
- LDBL_MAX_EXP LDBL_MIN LDBL_MIN_10_EXP LDBL_MIN_EXP
+=for comment
+#TABLE_MATH_START
 
-=head2 Math constants from math.h
+The constant names for this math module are inserted here during
+installation.
 
- HUGE_VAL
-
-=head2 Math constants from stdlib.h
-
- RAND_MAX
-
-=head2 Math related constants in limits.h
-
- CHAR_BIT CHAR_MAX CHAR_MIN UCHAR_MAX SCHAR_MAX SCHAR_MIN
- SHRT_MAX SHRT_MIN USHRT_MAX
- INT_MAX INT_MIN UINT_MAX
- LONG_MAX LONG_MIN ULONG_MAX
+=for comment
+#TABLE_MATH_END
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.05,
-built on December 23, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.06,
+built on December 25, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

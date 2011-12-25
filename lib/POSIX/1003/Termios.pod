@@ -214,10 +214,22 @@ See also L<POSIX::1003::Proc::ctermid()|POSIX::1003::Proc/"Standard POSIX functi
 
 =back
 
+All constants, shown here with the values discovered during installation
+of this module:
+
+=for comment
+#TABLE_TERMIOS_START
+
+The constant names for this math module are inserted here during
+installation.
+
+=for comment
+#TABLE_TERMIOS_END
+
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.05,
-built on December 23, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.06,
+built on December 25, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

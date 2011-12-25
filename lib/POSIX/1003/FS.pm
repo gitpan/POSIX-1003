@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::FS;
 use vars '$VERSION';
-$VERSION = '0.05';
+$VERSION = '0.06';
 
 use base 'POSIX::1003';
 
@@ -22,13 +22,15 @@ my @constants = qw/
 
 # POSIX.xs defines L_ctermid L_cuserid L_tmpname: useless!
 
-# Blocks resp from sys/stat.h, unistd.h, utime.h
+# Blocks resp from sys/stat.h, unistd.h, utime.h, sys/types
 my @functions = qw/
- mkfifo
+ mkfifo mknod
 
  access lchown
 
  utime
+
+ major minor makedev
  /;
 
 our @IN_CORE     = qw(utime);

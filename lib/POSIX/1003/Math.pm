@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Math;
 use vars '$VERSION';
-$VERSION = '0.05';
+$VERSION = '0.06';
 
 use base 'POSIX::1003';
 
@@ -48,9 +48,6 @@ our %EXPORT_TAGS =
   , functions => \@functions
   );
 
-
-
-# All constants in XS
 
 
 # the argument to be optional is important for expression priority!

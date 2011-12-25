@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Limit;
 use vars '$VERSION';
-$VERSION = '0.05';
+$VERSION = '0.06';
 
 use base 'POSIX::1003';
 
@@ -73,7 +73,7 @@ sub _create_constant($)
 {   my ($class, $name) = @_;
     if($name =~ m/^RLIMIT_/)
     {   my $id = $rlimit->{$name} // return sub() {undef};
-        return sub(;$$) { @_ ? _setrlimit($id, @_) : (_getrlimit($id))[0] };
+        return sub(;$$) { @_ ? _setrlimit($id, $_[0], $_[1]) : (_getrlimit($id))[0] };
     }
     else
     {   my $id = $ulimit->{$name} // return sub() {undef};

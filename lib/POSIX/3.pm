@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::3;
 use vars '$VERSION';
-$VERSION = '0.05';
+$VERSION = '0.06';
 
 
 use Carp qw/croak/;
@@ -92,6 +92,7 @@ sub import(@)
     foreach (@_)
     {   if($_ eq ':all')
         {   $mods{$_}++ for values %mod_tag;
+            *{$to.'::'.$_} = \&$_ for keys %own_functions;
         }
         elsif(m/^\:(.*)/)
         {   exists $tags{$1} or croak "unknown tag '$_'";

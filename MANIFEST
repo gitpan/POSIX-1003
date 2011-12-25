@@ -74,4 +74,5 @@ t/63properties.t
 t/64ulimit.t
 t/65rlimit.t
 t/70lazy.t
+typemap
 META.yml                                 Module meta-data (added by MakeMaker)

@@ -179,34 +179,22 @@ example:
 
 =head1 CONSTANTS
 
-=head2 Constants from unistd.h
+The following constants are exported, shown here with the values
+discovered during installation of this module:
 
- #name             #fixed value
- STDIN_FILENO      0
- STDOUT_FILENO     1
- STDERR_FILENO     2
+=for comment
+#TABLE_FDIO_START
 
-=head2 Constants from limits.h
+The constant names for this math module are inserted here during
+installation.
 
- PIPE_BUF
- STREAM_MAX == _POSIX_STREAM_MAX
-            Minimum nr of streams supported by POSIX compliant
-            systems
- MAX_INPUT  Size of the type-ahead buffer (terminal)
- SSIZE_MAX  Max bytes taken in a single read or write system call
-
-=head2 Constants from stdio.h
-
-There is no C<POSIX::1003::Stdio> (yet), but these values may
-also be useful in non-buffered IO.
-
- BUFSIZ     Common IO buffer size
- EOF        End of file
+=for comment
+#TABLE_FDIO_END
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.05,
-built on December 23, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.06,
+built on December 25, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

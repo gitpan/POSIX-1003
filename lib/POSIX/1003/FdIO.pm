@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::FdIO;
 use vars '$VERSION';
-$VERSION = '0.05';
+$VERSION = '0.06';
 
 use base 'POSIX::1003';
 
@@ -35,13 +35,6 @@ our %EXPORT_TAGS =
  );
 
 __PACKAGE__->import(qw/SSIZE_MAX BUFSIZ/);
-
-
-use constant
- { STDIN_FILENO  => 0
- , STDOUT_FILENO => 1
- , STDERR_FILENO => 2
- };
 
 
 sub seekfd($$$)   { goto &POSIX::lseek }
@@ -93,5 +86,7 @@ sub readfd_all($;$$)
     $do_close or return $data;
     closefd($in) ? $data : undef;
 }
+
+
 
 1;
