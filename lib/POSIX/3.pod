@@ -17,7 +17,30 @@ POSIX::3 - help POSIX::1003 modules
 
 =head1 DESCRIPTION
 
+The L<POSIX::1003|POSIX::1003> suite implements access to many POSIX functions. It
+can be quite some work to type-in all the explicit C<require> lines. This
+module is slower during the import (because it knows the location of each
+of the hundreds of symbols) but loads the right modules automatically.
+
 =head2 Exporter
+
+This module uses nasty export tricks, so is not based in Exporter.
+Some modules have more than one tag related to them, and one tag may
+load multiple modules. When you do not specify symbol or tag, then B<all>
+are loaded into your namespace(!), the same behavior as POSIX has.
+
+If your import list starts with C<+1>, the symbols will not get into
+your own namespace, but that of your caller. Just like
+C<$Exporter::ExportLevel> (but a simpler syntax).
+
+  use POSIX::3 ':pathconf';
+  use POSIX::3 ':pc';       # same, abbreviated name
+
+  use POSIX::3 qw(PATH_MAX :math sin);
+
+  sub MyModule::import(@)   # your own tricky exporter
+  {   POSIX::3->import('+1', @_);
+  }
 
 =head3 EXPORT_TAGS
 
@@ -40,29 +63,6 @@ POSIX::3 - help POSIX::1003 modules
   :signals :sigset      POSIX::SigSet
   :termio  :termios     POSIX::1003::Termios
   :time                 POSIX::1003::Time
-
-This module uses nasty export tricks, so is not based in Exporter.
-Some modules have more than one tag related to them, and one tag may
-load multiple modules. When you do not specify symbol or tag, then B<all>
-are loaded into your namespace(!), the same behavior as POSIX has.
-
-If your import list starts with C<+1>, the symbols will not get into
-your own namespace, but that of your caller. Just like
-C<$Exporter::ExportLevel> (but a simpler syntax).
-
-  use POSIX::3 ':pathconf';
-  use POSIX::3 ':pc';       # same, abbreviated name
-
-  use POSIX::3 qw(PATH_MAX :math sin);
-
-  sub MyModule::import(@)   # your own tricky exporter
-  {   POSIX::3->import('+1', @_);
-  }
-
-The L<POSIX::1003|POSIX::1003> suite implements access to many POSIX functions. It
-can be quite some work to type-in all the explicit C<require> lines. This
-module is slower during the import (because it knows the location of each
-of the hundreds of symbols) but loads the right modules automatically.
 
 =head1 FUNCTIONS
 
@@ -89,8 +89,8 @@ available modules are taken.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.06,
-built on December 25, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.07,
+built on December 28, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

@@ -4,6 +4,16 @@ POSIX::Overview - POSIX in Perl
 
 =head1 DESCRIPTION
 
+The I<POSIX standard> defines access to the operating system.  Most
+operating systems (not limited to the UNIX family) provide at least a
+part of this standard, sometimes as optional or commercial extension
+package.
+
+POSIX describes how C-programmers can access the operation system. Perl's
+core and additional modules on CPAN together, offer most of the POSIX
+functionality, although usually in a more powerful way. This manual-page
+tries to explain where you can find POSIX features in the Perl language.
+
 =head2 The specification
 
 The I<Single UNIX Specification: Authorized Guide to Version 4> published
@@ -66,17 +76,26 @@ Finally, the tables often refer to modules which implement comparable
 functionality.  In most cases, they offer a pure Perl (so portable)
 alternative.
 
-The I<POSIX standard> defines access to the operating system.  Most
-operating systems (not limited to the UNIX family) provide at least a
-part of this standard, sometimes as optional or commercial extension
-package.
-
-POSIX describes how C-programmers can access the operation system. Perl's
-core and additional modules on CPAN together, offer most of the POSIX
-functionality, although usually in a more powerful way. This manual-page
-tries to explain where you can find POSIX features in the Perl language.
-
 =head1 FUNCTIONS
+
+The functions are categorized as listed in chapter 3.3 of the book of
+the Open Group, with the exception of those sections which only list
+unsupported features.
+
+Nothing related to threads, scheduling and tracing control is provided
+by Perl.  See L<perlthrtut> on the thread implementation of Perl.
+
+=over 4
+
+=item * functions beginning with C<posix_> are not supported
+
+=item * functions beginning with C<sched_> are not supported
+
+=item * functions beginning with C< pthread_> are not supported
+
+=item * thread-safe functions, ending on C<_r>, are not supported
+
+=back
 
 =head2 Asynchronous Input and Output Interfaces
 
@@ -453,10 +472,11 @@ L<POE>, L<IO::Multiplex>, ...and many more
 
   poll                            IO::Poll
   pselect                         POSIX::pselect
-  select      perlfunc            IO::Select
-
-Macros C<FD_CLR>, C<FD_ISSET>, C<FD_SET>, C<FD_ZERO> and not
-provided.  However, they can be simulated easily with L<perlfunc/vec>
+  select      perlfunc            ::Events IO::Select
+  FD_CLR                          ::Events
+  FD_ISSET                        ::Events
+  FD_SET                          ::Events
+  FD_ZERO                         ::Events
 
 =head2 Extended Device Input and Output Interfaces
 
@@ -1115,25 +1135,6 @@ Streams are not supported.  So no:
 
   fattach, fdetach, getmsg, getpmsg, isastream, putmsg, putpmsg
 
-The functions are categorized as listed in chapter 3.3 of the book of
-the Open Group, with the exception of those sections which only list
-unsupported features.
-
-Nothing related to threads, scheduling and tracing control is provided
-by Perl.  See L<perlthrtut> on the thread implementation of Perl.
-
-=over 4
-
-=item * functions beginning with C<posix_> are not supported
-
-=item * functions beginning with C<sched_> are not supported
-
-=item * functions beginning with C< pthread_> are not supported
-
-=item * thread-safe functions, ending on C<_r>, are not supported
-
-=back
-
 =head1 CONSTANTS
 
 POSIX also defines zillions of constants. They are listed in
@@ -1144,8 +1145,8 @@ constants can be read via L<POSIX::1003::Properties>.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.06,
-built on December 25, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.07,
+built on December 28, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS

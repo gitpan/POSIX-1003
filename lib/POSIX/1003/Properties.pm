@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Properties;
 use vars '$VERSION';
-$VERSION = '0.06';
+$VERSION = '0.07';
 
 use base 'POSIX::1003';
 
