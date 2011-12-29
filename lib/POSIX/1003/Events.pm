@@ -7,15 +7,17 @@ use strict;
 
 package POSIX::1003::Events;
 use vars '$VERSION';
-$VERSION = '0.07';
+$VERSION = '0.08';
 
 use base 'POSIX::1003';
 
 my @constants;
 my @functions = qw/
- FD_CLR FD_ISSET FD_SET FD_ZERO 
- select poll
+  FD_CLR FD_ISSET FD_SET FD_ZERO select
+  poll poll_names
  /;
+
+my @poll = qw(poll poll_names);
 
 our %EXPORT_TAGS =
  ( constants => \@constants
@@ -23,7 +25,6 @@ our %EXPORT_TAGS =
  );
 
 my  $poll;
-our %poll;
 
 BEGIN {
     $poll = poll_table;
@@ -49,5 +50,18 @@ sub poll($;$)
     _poll($data, $timeout);
 }
 
+#----------------------
+
+sub poll_names() { keys %$poll }
+
+sub _create_constant($)
+{   my ($class, $name) = @_;
+    $name =~ m/^POLL/
+        or die "constants expected to start with POLL, not $name\n";
+    my $val = $poll->{$name} // return sub() {undef};
+    sub() {$val};
+
+}
+#----------------------
 
 1;

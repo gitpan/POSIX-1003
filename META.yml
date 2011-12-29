@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               POSIX-1003
-version:            0.07
+version:            0.08
 abstract:           POSIX::1003, alternative for POSIX in core
 author:
     - Mark Overmeer

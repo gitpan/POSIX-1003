@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Limit;
 use vars '$VERSION';
-$VERSION = '0.07';
+$VERSION = '0.08';
 
 use base 'POSIX::1003';
 

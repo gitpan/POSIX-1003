@@ -7,10 +7,10 @@ use warnings;
 
 package POSIX::1003;
 use vars '$VERSION';
-$VERSION = '0.07';
+$VERSION = '0.08';
 
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 use Carp 'croak';
 
 { use XSLoader;
@@ -48,8 +48,9 @@ sub import(@)
             @take{@$tag} = ();
         }
         else
-        {   m/^_(?:SC|CS|PC|POSIX)_/ || exists $ok->{$_}
-                or croak "$class does not export $_";
+        {   m/^(?:_SC_|_CS_|_PC_|_POSIX_|UL_|RLIM|GET_|SET_|POLL)/
+                or exists $ok->{$_}
+                    or croak "$class does not export $_";
             undef $take{$_};
         }
     }
@@ -66,7 +67,7 @@ sub import(@)
         {   # reuse the already created function; might also be a function
             # which is actually implemented in the $class namespace.
         }
-        elsif( $f =~ m/^(_SC|_CS|_PC|_POSIX|UL|RLIMIT)_/ )
+        elsif( $f =~ m/^(?:_SC_|_CS_|_PC_|_POSIX_|UL_|RLIMIT_|POLL)/ )
         {   $export = $class->_create_constant($f);
         }
         elsif( $f !~ m/[^A-Z0-9_]/ )  # faster than: $f =~ m!^[A-Z0-9_]+$!
@@ -106,7 +107,7 @@ sub import(@)
 
 package POSIX::1003::ReadOnlyTable;
 use vars '$VERSION';
-$VERSION = '0.07';
+$VERSION = '0.08';
 
 sub TIEHASH($) { bless $_[1], $_[0] }
 sub FETCH($)   { $_[0]->{$_[1]} }
