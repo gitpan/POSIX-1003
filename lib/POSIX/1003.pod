@@ -61,6 +61,18 @@ into the namespace of the caller namespace.
   {   POSIX::1003::Pathconf->import('+1', @_);
   }
 
+=head1 METHODS
+
+=over 4
+
+=item POSIX::1003-E<gt>B<exampleValue>(NAME)
+
+Returns an example value for the NAMEd variable. Often, this is a
+compile-time or runtime constant. For some extensions, like C<::Pathconf>,
+that may not be the case.
+
+=back
+
 =head1 DETAILS
 
 =head2 Modules in this distribution
@@ -240,7 +252,7 @@ of a constant.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.10,
+This module is part of POSIX-1003 distribution version 0.11,
 built on January 04, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 

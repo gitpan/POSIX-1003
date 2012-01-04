@@ -7,10 +7,10 @@ use warnings;
 
 package POSIX::1003;
 use vars '$VERSION';
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 use Carp 'croak';
 
 { use XSLoader;
@@ -18,17 +18,19 @@ use Carp 'croak';
   XSLoader::load 'POSIX::1003', $VERSION;
 }
 
-my $constant_table = qr/ ^ (?:
+my $in_constant_table;
+BEGIN { $in_constant_table = qr/ ^ (?:
    _SC_      # sysconf
  | _CS_      # confstr
  | _PC_      # pathconf
- | _POSIX_   # property
+ | _POSIX    # property
  | UL_       # ulimit
  | RLIM      # rlimit
  | GET_|SET_ # rlimit aix
  | POLL      # poll
- | SIG       # signals
+ | SIG[^_]   # signals
  ) /x;
+ }
 
 sub import(@)
 {   my $class = shift;
@@ -60,7 +62,7 @@ sub import(@)
             @take{@$tag} = ();
         }
         else
-        {   $_ =~ $constant_table or exists $ok->{$_}
+        {   $_ =~ $in_constant_table or exists $ok->{$_}
                or croak "$class does not export $_";
             undef $take{$_};
         }
@@ -75,7 +77,7 @@ sub import(@)
         {   # reuse the already created function; might also be a function
             # which is actually implemented in the $class namespace.
         }
-        elsif($f =~ $constant_table)
+        elsif($f =~ $in_constant_table)
         {   *{$class.'::'.$f} = $export = $class->_create_constant($f);
         }
         elsif( $f !~ m/[^A-Z0-9_]/ )  # faster than: $f =~ m!^[A-Z0-9_]+$!
@@ -113,9 +115,23 @@ sub import(@)
 }
 
 
+sub exampleValue($)
+{   my ($pkg, $name) = @_;
+    no strict 'refs';
+
+    my $tags      = \%{"$pkg\::EXPORT_TAGS"} or die;
+    my $constants = $tags->{constants} || [];
+    grep {$_ eq $name} @$constants
+        or return undef;
+
+    my $val = &{"$pkg\::$name"};
+    defined $val ? $val : 'undef';
+}
+
+
 package POSIX::1003::ReadOnlyTable;
 use vars '$VERSION';
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 sub TIEHASH($) { bless $_[1], $_[0] }
 sub FETCH($)   { $_[0]->{$_[1]} }

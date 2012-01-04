@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Limit;
 use vars '$VERSION';
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 use base 'POSIX::1003';
 
@@ -17,6 +17,7 @@ my (@ulimit, @rlimit, @constants, @functions);
 our %EXPORT_TAGS =
   ( ulimit    => \@ulimit
   , rlimit    => \@rlimit
+  , constants => \@constants
   , functions => \@functions
   , table     => [ qw/%ulimit %rlimit/ ]
   );
@@ -51,6 +52,31 @@ BEGIN {
 sub RLIM_SAVED_MAX { $rlim_saved_max }
 sub RLIM_SAVED_CUR { $rlim_saved_cur }
 sub RLIM_INFINITY  { $rlim_infinity  }
+
+sub getrlimit($);
+sub setrlimit($$;$);
+sub ulimit($;$);
+
+
+sub exampleValue($)
+{   my ($class, $name) = @_;
+    if($name =~ m/^RLIMIT_/)
+    {   my ($soft, $hard, $success) = getrlimit $name;
+        $soft //= 'undef';
+        $hard //= 'undef';
+        return "$soft, $hard";
+    }
+    elsif($name =~ m/^UL_GET|^GET_/)
+    {   my $val = ulimit $name;
+        return defined $val ? $val : 'undef';
+    }
+    elsif($name =~ m/^UL_SET|^SET_/)
+    {   return '(setter)';
+    }
+    else
+    {   $class->SUPER::exampleValue($name);
+    }
+}
 
 
 sub ulimit($;$)

@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Sysconf;
 use vars '$VERSION';
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 use base 'POSIX::1003';
 
@@ -30,6 +30,16 @@ BEGIN {
     $sysconf = sysconf_table;
     push @constants, keys %$sysconf;
     tie %sysconf, 'POSIX::1003::ReadOnlyTable', $sysconf;
+}
+
+sub sysconf($);
+
+
+sub exampleValue($)
+{   my ($class, $name) = @_;
+    $name =~ m/^_SC_/ or return;
+    my $val = sysconf $name;
+    defined $val ? $val : 'undef';
 }
 
 

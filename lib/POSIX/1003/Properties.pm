@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Properties;
 use vars '$VERSION';
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 use base 'POSIX::1003';
 
@@ -30,6 +30,16 @@ BEGIN {
     $property = property_table;
     push @constants, keys %$property;
     tie %property, 'POSIX::1003::ReadOnlyTable', $property;
+}
+
+sub property($);
+
+
+sub exampleValue($)
+{   my ($class, $name) = @_;
+    $name =~ m/^_POSIX/ or return;
+    my $val = property $name;
+    defined $val ? $val : 'undef';
 }
 
 

@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Pathconf;
 use vars '$VERSION';
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 use base 'POSIX::1003';
 
@@ -30,6 +30,16 @@ BEGIN {
     $pathconf = pathconf_table;
     push @constants, keys %$pathconf;
     tie %pathconf, 'POSIX::1003::ReadOnlyTable', $pathconf;
+}
+
+sub pathconf($$);
+
+
+sub exampleValue($)
+{   my ($class, $name) = @_;
+    $name =~ m/^_PC_/ or return;
+    my $val = pathconf __FILE__, $name;
+    defined $val ? $val : 'undef';
 }
 
 

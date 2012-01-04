@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::3;
 use vars '$VERSION';
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 
 use Carp qw/croak/;
@@ -41,7 +41,9 @@ my %tags =
   , processes =>   'POSIX::1003::Proc'
   , proc =>        'POSIX::1003::Proc'
   , properties =>  'POSIX::1003::Properties'
+  , property =>    'POSIX::1003::Properties'
   , props =>       'POSIX::1003::Properties'
+  , posix =>       'POSIX::1003::Properties'
   , sc =>          'POSIX::1003::Sysconf'
   , sigaction =>   'POSIX::SigAction'
   , signals =>     [qw/POSIX::1003::Signals POSIX::SigSet POSIX::SigAction/]
@@ -171,11 +173,21 @@ sub show_posix_names(@)
 {   my $pkg_of = posix_1003_names @_;
     my %order  = map {(my $n = lc $_) =~ s/[^A-Za-z0-9]//g; ($n => $_)}
         keys %$pkg_of;  # Swartzian transform
+
+    no strict 'refs';
     foreach (sort keys %order)
     {   my $name = $order{$_};
         my $pkg  = $pkg_of->{$name};
-        (my $abbrev = $pkg) =~ s/^POSIX\:\:1003\:\:/P::3::/;
-        printf "%-16s :%-10s %s\n", $abbrev, $mod_tag{$pkg}, $name;
+        $pkg->import($name);
+        my $val  = $pkg->exampleValue($name);
+        (my $abbrev = $pkg) =~ s/^POSIX\:\:1003\:\:/::/;
+        my $mod  = $mod_tag{$pkg};
+        if(defined $val)
+        {   printf "%-12s :%-10s %-30s %s\n", $abbrev, $mod, $name, $val;
+        }
+        else
+        {   printf "%-12s :%-10s %s\n", $abbrev, $mod, $name;
+        }
     }
     print "*** ".(keys %$pkg_of)." symbols in total\n";
 }

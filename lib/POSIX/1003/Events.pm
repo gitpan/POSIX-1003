@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Events;
 use vars '$VERSION';
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 use base 'POSIX::1003';
 

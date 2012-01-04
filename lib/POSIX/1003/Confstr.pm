@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Confstr;
 use vars '$VERSION';
-$VERSION = '0.10';
+$VERSION = '0.11';
 
 use base 'POSIX::1003';
 
@@ -32,6 +32,17 @@ BEGIN {
     tie %confstr, 'POSIX::1003::ReadOnlyTable', $confstr;
 }
 
+sub confstr($);
+
+
+sub exampleValue($)
+{   my ($class, $name) = @_;
+    $name =~ m/^_CS_/ or return;
+    my $val = confstr $name;
+    defined $val ? "'$val'" : 'undef';
+}
+
+#-----------------------
 
 sub confstr($)
 {   my $key = shift // return;

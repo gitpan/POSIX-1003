@@ -11,6 +11,16 @@ POSIX::1003::Events - POSIX for the file-system
 
   use POSIX::1003::Events;
 
+=head1 METHODS
+
+=over 4
+
+=item POSIX::1003::Events-E<gt>B<exampleValue>(NAME)
+
+See L<POSIX::1003/"METHODS">
+
+=back
+
 =head1 FUNCTIONS
 
 =head2 Standard POSIX
@@ -91,7 +101,7 @@ where returned at that time.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.10,
+This module is part of POSIX-1003 distribution version 0.11,
 built on January 04, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
