@@ -7,15 +7,13 @@ use strict;
 
 package POSIX::1003::Signals;
 use vars '$VERSION';
-$VERSION = '0.09';
+$VERSION = '0.10';
 
 use base 'POSIX::1003';
 
-my @signals = qw/
- SIGABRT SIGALRM SIGCHLD SIGCONT SIGFPE SIGHUP SIGILL SIGINT
- SIGKILL SIGPIPE SIGRTMIN SIGRTMAX SIGQUIT SIGSEGV SIGSTOP SIGTERM
- SIGTSTP SIGTTIN SIGTTOU SIGUSR1 SIGUSR2 SIGBUS SIGPOLL SIGPROF SIGSYS
- SIGTRAP SIGURG SIGVTALRM SIGXCPU SIGXFSZ SIG_BLOCK SIG_DFL SIG_ERR
+my @signals;
+my @states  = qw/
+ SIG_BLOCK SIG_DFL SIG_ERR
  SIG_IGN SIG_SETMASK SIG_UNBLOCK
  /;
 
@@ -26,16 +24,32 @@ my @actions = qw/
 
 my @functions = qw/
  raise sigaction signal sigpending sigprocmask sigsuspend signal
+ signal_names
  /;
+
+my @constants = (@signals, @actions);
 
 our %EXPORT_TAGS =
   ( signals   => \@signals
   , actions   => \@actions
-  , constants => [ @signals, @actions ]
+  , states    => \@states
+  , constants => \@constants
   , functions => \@functions
+  , table     => [ '%signals' ]
   );
 
 our @IN_CORE = qw/kill/;
+
+my $signals;
+our %signals;
+
+BEGIN {
+    # initialize the :signals export tag
+    $signals = signals_table;
+    push @constants, keys %$signals;
+    push @signals,   keys %$signals;
+    tie %signals, 'POSIX::1003::ReadOnlyTable', $signals;
+}
 
 
 # Perl does not support pthreads, so:
@@ -48,5 +62,17 @@ sub sigprocmask($$;$) {goto &POSIX::sigprocmask }
 sub sigsuspend($)     {goto &POSIX::sigsuspend }
 sub signal($$)        { $SIG{$_[0]} = $_[1] }
 
+#--------------------------
+
+sub signal_names() { keys %$signals }
+
+#--------------------------
+
+
+sub _create_constant($)
+{   my ($class, $name) = @_;
+    my $val = $signals->{$name};
+    sub() {$val};
+}
 
 1;

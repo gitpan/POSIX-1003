@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Confstr;
 use vars '$VERSION';
-$VERSION = '0.09';
+$VERSION = '0.10';
 
 use base 'POSIX::1003';
 
@@ -48,8 +48,10 @@ sub _create_constant($)
     sub() {_confstr($id)};
 }
 
+#--------------------------
 
 sub confstr_names() { keys %$confstr }
 
+#--------------------------
 
 1;

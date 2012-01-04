@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Termios;
 use vars '$VERSION';
-$VERSION = '0.09';
+$VERSION = '0.10';
 
 use base 'POSIX::1003', 'POSIX::Termios';
 

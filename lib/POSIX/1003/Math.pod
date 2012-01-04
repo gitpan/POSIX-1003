@@ -179,7 +179,7 @@ installation.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.09,
+This module is part of POSIX-1003 distribution version 0.10,
 built on January 04, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 

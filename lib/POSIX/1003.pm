@@ -7,16 +7,28 @@ use warnings;
 
 package POSIX::1003;
 use vars '$VERSION';
-$VERSION = '0.09';
+$VERSION = '0.10';
 
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 use Carp 'croak';
 
 { use XSLoader;
   XSLoader::load 'POSIX';
   XSLoader::load 'POSIX::1003', $VERSION;
 }
+
+my $constant_table = qr/ ^ (?:
+   _SC_      # sysconf
+ | _CS_      # confstr
+ | _PC_      # pathconf
+ | _POSIX_   # property
+ | UL_       # ulimit
+ | RLIM      # rlimit
+ | GET_|SET_ # rlimit aix
+ | POLL      # poll
+ | SIG       # signals
+ ) /x;
 
 sub import(@)
 {   my $class = shift;
@@ -48,9 +60,8 @@ sub import(@)
             @take{@$tag} = ();
         }
         else
-        {   m/^(?:_SC_|_CS_|_PC_|_POSIX_|UL_|RLIM|GET_|SET_|POLL)/
-                or exists $ok->{$_}
-                    or croak "$class does not export $_";
+        {   $_ =~ $constant_table or exists $ok->{$_}
+               or croak "$class does not export $_";
             undef $take{$_};
         }
     }
@@ -64,7 +75,7 @@ sub import(@)
         {   # reuse the already created function; might also be a function
             # which is actually implemented in the $class namespace.
         }
-        elsif( $f =~ m/^(?:_SC_|_CS_|_PC_|_POSIX_|UL_|RLIMIT_|POLL)/ )
+        elsif($f =~ $constant_table)
         {   *{$class.'::'.$f} = $export = $class->_create_constant($f);
         }
         elsif( $f !~ m/[^A-Z0-9_]/ )  # faster than: $f =~ m!^[A-Z0-9_]+$!
@@ -104,7 +115,7 @@ sub import(@)
 
 package POSIX::1003::ReadOnlyTable;
 use vars '$VERSION';
-$VERSION = '0.09';
+$VERSION = '0.10';
 
 sub TIEHASH($) { bless $_[1], $_[0] }
 sub FETCH($)   { $_[0]->{$_[1]} }

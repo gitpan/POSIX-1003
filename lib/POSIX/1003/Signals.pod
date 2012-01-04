@@ -17,6 +17,10 @@ POSIX::1003::Signals - POSIX using signals
 
   kill SIGPOLL//SIGHUP, $$;
 
+  use POSIX::1003::Signals '%signals';
+  my $number = $signals{SIGHUP};
+  $signals{SIGNEW} = $number;
+
 =head1 DESCRIPTION
 
 This manual page explains the access to the POSIX C<sigaction>
@@ -113,7 +117,26 @@ Returns C<undef> on failure.
 
 =back
 
+=head2 Additional
+
+=over 4
+
+=item B<signal_names>()
+
+Returns a list with all known names, unsorted.
+
+=back
+
 =head1 CONSTANTS
+
+=over 4
+
+=item B<%signals>
+
+This exported variable is a (tied) HASH which maps C<SIG*> names
+to their numbers.
+
+=back
 
 The following constants are exported, shown here with the values
 discovered during installation of this module:
@@ -129,7 +152,7 @@ installation.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.09,
+This module is part of POSIX-1003 distribution version 0.10,
 built on January 04, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 

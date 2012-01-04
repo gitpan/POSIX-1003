@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::3;
 use vars '$VERSION';
-$VERSION = '0.09';
+$VERSION = '0.10';
 
 
 use Carp qw/croak/;
