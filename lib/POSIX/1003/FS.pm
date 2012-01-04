@@ -1,4 +1,4 @@
-# Copyrights 2011 by Mark Overmeer.
+# Copyrights 2011-2012 by Mark Overmeer.
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
 # Pod stripped from pm file by OODoc 2.00.
@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::FS;
 use vars '$VERSION';
-$VERSION = '0.08';
+$VERSION = '0.09';
 
 use base 'POSIX::1003';
 
@@ -33,7 +33,7 @@ my @functions = qw/
  major minor makedev
  /;
 
-our @IN_CORE     = qw(utime);
+our @IN_CORE     = qw(utime mkdir);
 
 our %EXPORT_TAGS =
  ( constants => \@constants

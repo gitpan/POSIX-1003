@@ -790,9 +790,9 @@ B<Warning,> different return parameters for POSIX.pm
 
 =head2 Realtime Signal Interfaces
 
-  sigqueue                        Signal::More
-  sigtimedwait                    Signal::More
-  sigwaitinfo                     Signal::More
+  sigqueue                        POSIX::RT::Signal
+  sigtimedwait                    POSIX::RT::Signal
+  sigwaitinfo                     POSIX::RT::Signal
 
 =head2 Regular Expression Interfaces
 
@@ -1145,14 +1145,14 @@ constants can be read via L<POSIX::1003::Properties>.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.08,
-built on December 29, 2011. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.09,
+built on January 04, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS
 
 Copyrights of the perl code and the related documentation by
-2011 by Mark Overmeer. For other contributors see ChangeLog.
+2011-2012 by Mark Overmeer. For other contributors see ChangeLog.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

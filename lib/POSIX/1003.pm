@@ -1,4 +1,4 @@
-# Copyrights 2011 by Mark Overmeer.
+# Copyrights 2011-2012 by Mark Overmeer.
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
 # Pod stripped from pm file by OODoc 2.00.
@@ -7,10 +7,10 @@ use warnings;
 
 package POSIX::1003;
 use vars '$VERSION';
-$VERSION = '0.08';
+$VERSION = '0.09';
 
 
-our $VERSION = '0.08';
+our $VERSION = '0.09';
 use Carp 'croak';
 
 { use XSLoader;
@@ -60,15 +60,12 @@ sub import(@)
     my $pkg = (caller $level)[0];
     foreach my $f (sort keys %take)
     {   my $export;
-        exists ${$pkg.'::'}{$f} && *{$pkg.'::'.$f}{CODE}
-            and next;
-
         if(exists ${$class.'::'}{$f} && ($export = *{"${class}::$f"}{CODE}))
         {   # reuse the already created function; might also be a function
             # which is actually implemented in the $class namespace.
         }
         elsif( $f =~ m/^(?:_SC_|_CS_|_PC_|_POSIX_|UL_|RLIMIT_|POLL)/ )
-        {   $export = $class->_create_constant($f);
+        {   *{$class.'::'.$f} = $export = $class->_create_constant($f);
         }
         elsif( $f !~ m/[^A-Z0-9_]/ )  # faster than: $f =~ m!^[A-Z0-9_]+$!
         {   # other all-caps names are always from POSIX.xs
@@ -107,7 +104,7 @@ sub import(@)
 
 package POSIX::1003::ReadOnlyTable;
 use vars '$VERSION';
-$VERSION = '0.08';
+$VERSION = '0.09';
 
 sub TIEHASH($) { bless $_[1], $_[0] }
 sub FETCH($)   { $_[0]->{$_[1]} }
