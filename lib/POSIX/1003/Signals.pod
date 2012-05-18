@@ -154,22 +154,48 @@ discovered during installation of this module:
 =for comment
 #TABLE_SIGNALS_START
 
-The constant names for this math module are inserted here during
-installation.
+  SA_NOCLDSTOP  1                 SIGKILL       9
+  SA_NOCLDWAIT  2                 SIGPIPE       13
+  SA_NODEFER    1073741824        SIGPOLL       29
+  SA_ONSTACK    134217728         SIGPROF       27
+  SA_RESETHAND  2147483648        SIGPWR        30
+  SA_RESTART    268435456         SIGQUIT       3
+  SA_SIGINFO    4                 SIGRTMAX      64
+  SIG_BLOCK     0                 SIGRTMIN      34
+  SIG_DFL       0                 SIGSEGV       11
+  SIG_ERR       -1                SIGSTKFLT     16
+  SIG_IGN       1                 SIGSTOP       19
+  SIG_SETMASK   2                 SIGSYS        31
+  SIG_UNBLOCK   1                 SIGTERM       15
+  SIGABRT       6                 SIGTRAP       5
+  SIGALRM       14                SIGTSTP       20
+  SIGBUS        7                 SIGTTIN       21
+  SIGCHLD       17                SIGTTOU       22
+  SIGCLD        17                SIGURG        23
+  SIGCONT       18                SIGUSR1       10
+  SIGFPE        8                 SIGUSR2       12
+  SIGHUP        1                 SIGVTALRM     26
+  SIGILL        4                 SIGWINCH      28
+  SIGINT        2                 SIGXCPU       24
+  SIGIO         29                SIGXFSZ       25
+  SIGIOT        6                 
+
 
 =for comment
 #TABLE_SIGNALS_END
 
+
+
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.11,
-built on January 04, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.12,
+built on May 18, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS
 
 Copyrights of the perl code and the related documentation by
-2011-2012 by Mark Overmeer. For other contributors see ChangeLog.
+2011-2012 by [Mark Overmeer]. For other contributors see ChangeLog.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

@@ -1,27 +1,27 @@
---- #YAML:1.0
-name:               POSIX-1003
-version:            0.11
-abstract:           POSIX::1003, alternative for POSIX in core
+---
+abstract: 'POSIX::1003, alternative for POSIX in core'
 author:
-    - Mark Overmeer
-license:            perl
-distribution_type:  module
-configure_requires:
-    ExtUtils::MakeMaker:  0
+  - 'Mark Overmeer'
 build_requires:
-    ExtUtils::MakeMaker:  0
-requires:
-    Errno:       0
-    Fcntl:       0
-    File::Spec:  0
-    POSIX:       0
-    Test::More:  0.47
-    XSLoader:    0
-no_index:
-    directory:
-        - t
-        - inc
-generated_by:       ExtUtils::MakeMaker version 6.56
+  ExtUtils::MakeMaker: 0
+configure_requires:
+  ExtUtils::MakeMaker: 0
+dynamic_config: 1
+generated_by: 'ExtUtils::MakeMaker version 6.6302, CPAN::Meta::Converter version 2.120921'
+license: perl
 meta-spec:
-    url:      http://module-build.sourceforge.net/META-spec-v1.4.html
-    version:  1.4
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: POSIX-1003
+no_index:
+  directory:
+    - t
+    - inc
+requires:
+  Errno: 0
+  Fcntl: 0
+  File::Spec: 0
+  POSIX: 0
+  Test::More: 0.47
+  XSLoader: 0
+version: 0.12

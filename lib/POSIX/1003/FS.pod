@@ -123,22 +123,26 @@ discovered during installation of this module:
 =for comment
 #TABLE_FSYS_START
 
-The constant names for this math module are inserted here during
-installation.
+  F_OK          0       MAX_CANON     255     R_OK          4
+  FILENAME_MAX  4096    NAME_MAX      255     W_OK          2
+  LINK_MAX      undef   PATH_MAX      4096    X_OK          1
+
 
 =for comment
 #TABLE_FSYS_END
 
+
+
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.11,
-built on January 04, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.12,
+built on May 18, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS
 
 Copyrights of the perl code and the related documentation by
-2011-2012 by Mark Overmeer. For other contributors see ChangeLog.
+2011-2012 by [Mark Overmeer]. For other contributors see ChangeLog.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

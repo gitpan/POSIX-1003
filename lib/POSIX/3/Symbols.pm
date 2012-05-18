@@ -1,4 +1,4 @@
-# Copyrights 2011-2012 by Mark Overmeer.
+# Copyrights 2011-2012 by [Mark Overmeer].
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
 # Pod stripped from pm file by OODoc 2.00.
@@ -9,7 +9,7 @@
 
 package POSIX::3;
 use vars '$VERSION';
-$VERSION = '0.11';
+$VERSION = '0.12';
 
 
 our %EXPORT_TAGS = (

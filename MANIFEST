@@ -5,7 +5,6 @@ Makefile.PL
 PODTAIL.txt
 README
 TODO
-gen.PL
 lib/POSIX/1003.pm
 lib/POSIX/1003.pod
 lib/POSIX/1003/Confstr.pm
@@ -16,8 +15,6 @@ lib/POSIX/1003/FS.pm
 lib/POSIX/1003/FS.pod
 lib/POSIX/1003/FdIO.pm
 lib/POSIX/1003/FdIO.pod
-lib/POSIX/1003/FileSystem.pm
-lib/POSIX/1003/FileSystem.pod
 lib/POSIX/1003/Limit.pm
 lib/POSIX/1003/Limit.pod
 lib/POSIX/1003/Locale.pm
@@ -64,7 +61,6 @@ t/01use.t
 t/20math.t
 t/21fdio.t
 t/22fs.t
-t/22fsys.t
 t/23locale.t
 t/24os.t
 t/25proc.t
@@ -79,4 +75,5 @@ t/64ulimit.t
 t/65rlimit.t
 t/70lazy.t
 typemap
-META.yml                                 Module meta-data (added by MakeMaker)
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)

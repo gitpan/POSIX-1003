@@ -1,4 +1,4 @@
-# Copyrights 2011-2012 by Mark Overmeer.
+# Copyrights 2011-2012 by [Mark Overmeer].
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
 # Pod stripped from pm file by OODoc 2.00.
@@ -7,10 +7,10 @@ use warnings;
 
 package POSIX::1003;
 use vars '$VERSION';
-$VERSION = '0.11';
+$VERSION = '0.12';
 
 
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 use Carp 'croak';
 
 { use XSLoader;
@@ -131,7 +131,7 @@ sub exampleValue($)
 
 package POSIX::1003::ReadOnlyTable;
 use vars '$VERSION';
-$VERSION = '0.11';
+$VERSION = '0.12';
 
 sub TIEHASH($) { bless $_[1], $_[0] }
 sub FETCH($)   { $_[0]->{$_[1]} }

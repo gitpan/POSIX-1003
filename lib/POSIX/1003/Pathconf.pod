@@ -93,21 +93,34 @@ where returned for a random file at the time.
 =for comment
 #TABLE_PATHCONF_START
 
-   If you install the module, the table will be filled-in here
+  _PC_2_SYMLINKS          1       _PC_PIPE_BUF            4096
+  _PC_ALLOC_SIZE_MIN      4096    _PC_PRIO_IO             undef
+  _PC_ASYNC_IO            1       _PC_REC_INCR_XFER_SIZE  undef
+  _PC_CHOWN_RESTRICTED    1       _PC_REC_MAX_XFER_SIZE   undef
+  _PC_FILESIZEBITS        64      _PC_REC_MIN_XFER_SIZE   4096
+  _PC_LINK_MAX            32000   _PC_REC_XFER_ALIGN      4096
+  _PC_MAX_CANON           255     _PC_SOCK_MAXBUF         undef
+  _PC_MAX_INPUT           255     _PC_SYMLINK_MAX         undef
+  _PC_NAME_MAX            255     _PC_SYNC_IO             undef
+  _PC_NO_TRUNC            1       _PC_VDISABLE            0
+  _PC_PATH_MAX            4096    
+
 
 =for comment
 #TABLE_PATHCONF_END
 
+
+
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.11,
-built on January 04, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.12,
+built on May 18, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.
 
 =head1 COPYRIGHTS
 
 Copyrights of the perl code and the related documentation by
-2011-2012 by Mark Overmeer. For other contributors see ChangeLog.
+2011-2012 by [Mark Overmeer]. For other contributors see ChangeLog.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
