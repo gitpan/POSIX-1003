@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Confstr;
 use vars '$VERSION';
-$VERSION = '0.12';
+$VERSION = '0.13';
 
 use base 'POSIX::1003';
 
@@ -19,7 +19,7 @@ my @functions = qw/confstr confstr_names/;
 our %EXPORT_TAGS =
   ( constants => \@constants
   , functions => \@functions
-  , table     => [ '%confstr' ]
+  , tables    => [ '%confstr' ]
   );
 
 my  $confstr;

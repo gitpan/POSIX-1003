@@ -111,7 +111,7 @@ where returned at that time.
   _SC_ARG_MAX                       2097152
   _SC_ASYNCHRONOUS_IO               200809
   _SC_ATEXIT_MAX                    2147483647
-  _SC_AVPHYS_PAGES                  50300
+  _SC_AVPHYS_PAGES                  21597
   _SC_BARRIERS                      200809
   _SC_BASE                          undef
   _SC_BC_BASE_MAX                   99
@@ -311,11 +311,14 @@ where returned at that time.
 
 
 
+
+
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.12,
-built on May 18, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
-is released with Perl itself.
+This module is part of POSIX-1003 distribution version 0.13,
+built on July 26, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+is released with Perl itself.  See also M<POSIX::Util> for
+additional functionality.
 
 =head1 COPYRIGHTS
 

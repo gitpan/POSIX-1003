@@ -7,38 +7,64 @@ use strict;
 
 package POSIX::1003::FS;
 use vars '$VERSION';
-$VERSION = '0.12';
+$VERSION = '0.13';
 
 use base 'POSIX::1003';
 
 # Blocks resp from unistd.h, stdio.h, limits.h
-my @constants = qw/
- F_OK W_OK X_OK R_OK
+my @constants;
+my @access = qw/access/;
+my @stat_checks = qw/S_ISDIR S_ISCHR S_ISBLK S_ISREG S_ISFIFO
+  S_ISLNK S_ISSOCK S_ISWHT/;
+my @stat  = (qw/stat lstat/, @stat_checks);
 
- FILENAME_MAX
-
- LINK_MAX MAX_CANON NAME_MAX PATH_MAX
- /;
+sub S_ISDIR($)  { ($_[0] & S_IFMT()) == S_IFDIR()}
+sub S_ISCHR($)  { ($_[0] & S_IFMT()) == S_IFCHR()}
+sub S_ISBLK($)  { ($_[0] & S_IFMT()) == S_IFBLK()}
+sub S_ISREG($)  { ($_[0] & S_IFMT()) == S_IFREG()}
+sub S_ISFIFO($) { ($_[0] & S_IFMT()) == S_IFIFO()}
+sub S_ISLNK($)  { ($_[0] & S_IFMT()) == S_IFLNK()}
+sub S_ISSOCK($) { ($_[0] & S_IFMT()) == S_IFSOCK()}
+sub S_ISWHT($)  { ($_[0] & S_IFMT()) == S_IFWHT()}  # FreeBSD
 
 # POSIX.xs defines L_ctermid L_cuserid L_tmpname: useless!
 
 # Blocks resp from sys/stat.h, unistd.h, utime.h, sys/types
 my @functions = qw/
- mkfifo mknod
-
+ mkfifo mknod stat lstat
  access lchown
-
  utime
-
  major minor makedev
  /;
 
-our @IN_CORE     = qw(utime mkdir);
+our @IN_CORE     = qw(utime mkdir stat lstat);
 
 our %EXPORT_TAGS =
  ( constants => \@constants
  , functions => \@functions
+ , access    => \@access
+ , stat      => \@stat
+ , tables    => [ qw/%access %stat/ ]
  );
+
+my ($fsys, %access, %stat);
+
+BEGIN {
+    $fsys = fsys_table;
+    push @constants, keys %$fsys;
+
+    # initialize the :access export tag
+    push @access, grep /_OK$/, keys %$fsys;
+    my %access_subset;
+    @access_subset{@access} = @{$fsys}{@access};
+    tie %access,  'POSIX::1003::ReadOnlyTable', \%access_subset;
+
+    # initialize the :fsys export tag
+    push @stat, grep /^S_/, keys %$fsys;
+    my %stat_subset;
+    @stat_subset{@stat} = @{$fsys}{@stat};
+    tie %stat, 'POSIX::1003::ReadOnlyTable', \%stat_subset;
+}
 
 
 sub lchown($$@)
@@ -48,5 +74,11 @@ sub lchown($$@)
     $successes;
 }
 
+
+sub _create_constant($)
+{   my ($class, $name) = @_;
+    my $val = $fsys->{$name};
+    sub() {$val};
+}
 
 1;

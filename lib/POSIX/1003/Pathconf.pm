@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Pathconf;
 use vars '$VERSION';
-$VERSION = '0.12';
+$VERSION = '0.13';
 
 use base 'POSIX::1003';
 
@@ -19,7 +19,7 @@ my @functions = qw/pathconf fpathconf pathconf_names/;
 our %EXPORT_TAGS =
   ( constants => \@constants
   , functions => \@functions
-  , table     => [ '%pathconf' ]
+  , tables    => [ '%pathconf' ]
   );
 
 my  $pathconf;

@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Sysconf;
 use vars '$VERSION';
-$VERSION = '0.12';
+$VERSION = '0.13';
 
 use base 'POSIX::1003';
 
@@ -19,7 +19,7 @@ my @functions = qw/sysconf sysconf_names/;
 our %EXPORT_TAGS =
   ( constants => \@constants
   , functions => \@functions
-  , table     => [ '%sysconf' ]
+  , tables    => [ '%sysconf' ]
   );
 
 my  $sysconf;

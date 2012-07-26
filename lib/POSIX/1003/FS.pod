@@ -9,11 +9,10 @@ POSIX::1003::FS - POSIX for the file-system
 
 =head1 SYNOPSIS
 
-  use POSIX::1003::FS qw(access R_OK);
-  if(access($fn, R_OK)) # $fn is readible?
+  use POSIX::1003::FS ':access';
+  if(access $fn, R_OK) # $fn is readible?
 
-  use POSIX::1003::FS qw(mkfifo);
-  use Fcntl ':mode';
+  use POSIX::1003::FS qw(mkfifo :stat);
   mkfifo($path, S_IRUSR|S_IWUSR) or die $!;
 
   # Absorbed from Unix::Mknod
@@ -98,6 +97,29 @@ B<Warning,> C<POSIX.pm> uses a different parameter order than core.
 
 =over 4
 
+=item B<S_ISBLK>(MODE)
+
+=item B<S_ISCHR>(MODE)
+
+=item B<S_ISDIR>(MODE)
+
+example: 
+
+  use File::stat 'stat';
+  if(S_ISDIR(stat($fn)->mode)) ...
+
+  if(S_ISDIR((lstat $fn)[2])) ...
+
+=item B<S_ISFIFO>(MODE)
+
+=item B<S_ISLNK>(MODE)
+
+=item B<S_ISREG>(MODE)
+
+=item B<S_ISSOCK>(MODE)
+
+=item B<S_ISWHT>(MODE)
+
 =item B<major>(DEVICE)
 
 =item B<makedev>(MAJOR, MINOR)
@@ -123,9 +145,16 @@ discovered during installation of this module:
 =for comment
 #TABLE_FSYS_START
 
-  F_OK          0       MAX_CANON     255     R_OK          4
-  FILENAME_MAX  4096    NAME_MAX      255     W_OK          2
-  LINK_MAX      undef   PATH_MAX      4096    X_OK          1
+  F_OK          0       S_IFLNK       40960   S_ISVTX       512
+  FILENAME_MAX  4096    S_IFMT        61440   S_IWGRP       16
+  MAX_CANON     255     S_IFREG       32768   S_IWOTH       2
+  NAME_MAX      255     S_IFSOCK      49152   S_IWUSR       128
+  PATH_MAX      4096    S_IRGRP       32      S_IXGRP       8
+  R_OK          4       S_IROTH       4       S_IXOTH       1
+  S_IFBLK       24576   S_IRUSR       256     S_IXUSR       64
+  S_IFCHR       8192    S_IRWXG       56      W_OK          2
+  S_IFDIR       16384   S_IRWXO       7       X_OK          1
+  S_IFIFO       4096    S_IRWXU       448     
 
 
 =for comment
@@ -133,11 +162,18 @@ discovered during installation of this module:
 
 
 
+
+
+All functions and constants which start with C<S_*> can be imported
+using the C<:stat> tag, including all related C<S_IF*> functions.
+The C<*_OK> tags can be imported with C<:access> =cut
+
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.12,
-built on May 18, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
-is released with Perl itself.
+This module is part of POSIX-1003 distribution version 0.13,
+built on July 26, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+is released with Perl itself.  See also M<POSIX::Util> for
+additional functionality.
 
 =head1 COPYRIGHTS
 

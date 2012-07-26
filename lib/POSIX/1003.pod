@@ -140,16 +140,6 @@ For getting and setting resource limits.
 
 =over 4
 
-=item Fcntl
-
-Flags for modes, seek and fcntl are left to be defined by
-the Fcntl module.
-
-=item Errno
-
-All constants representing error numbers are left to be defined in
-the Errno module.
-
 =item User::pwent
 
 Provides an OO interface around C<getpw*()>
@@ -252,9 +242,10 @@ of a constant.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.12,
-built on May 18, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
-is released with Perl itself.
+This module is part of POSIX-1003 distribution version 0.13,
+built on July 26, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+is released with Perl itself.  See also M<POSIX::Util> for
+additional functionality.
 
 =head1 COPYRIGHTS
 

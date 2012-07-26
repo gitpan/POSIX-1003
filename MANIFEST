@@ -3,7 +3,6 @@ ChangeLog
 MANIFEST
 Makefile.PL
 PODTAIL.txt
-README
 TODO
 lib/POSIX/1003.pm
 lib/POSIX/1003.pod
@@ -47,6 +46,8 @@ lib/POSIX/SigSet.pm
 lib/POSIX/SigSet.pod
 lists.PL
 lists/confstr.txt
+lists/fdio.txt
+lists/fsys.txt
 lists/pathconf.txt
 lists/poll.txt
 lists/posix.txt
@@ -75,5 +76,6 @@ t/64ulimit.t
 t/65rlimit.t
 t/70lazy.t
 typemap
+xt/99pod.t
 META.yml                                 Module YAML meta-data (added by MakeMaker)
 META.json                                Module JSON meta-data (added by MakeMaker)

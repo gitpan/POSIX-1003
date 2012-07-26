@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Limit;
 use vars '$VERSION';
-$VERSION = '0.12';
+$VERSION = '0.13';
 
 use base 'POSIX::1003';
 
@@ -19,7 +19,7 @@ our %EXPORT_TAGS =
   , rlimit    => \@rlimit
   , constants => \@constants
   , functions => \@functions
-  , table     => [ qw/%ulimit %rlimit/ ]
+  , tables    => [ qw/%ulimit %rlimit/ ]
   );
 
 my  ($ulimit, $rlimit);

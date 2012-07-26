@@ -10,9 +10,13 @@ POSIX::1003::FdIO - POSIX handling file descriptors
 =head1 SYNOPSIS
 
   use POSIX::1003::FdIO;
+
   $fd = openfd($fn, O_RDWR);
+  defined $fd or die $!;   # $fd==0 is valid value! (STDIN)
+
   $fd = openfd($fn, O_WRONLY|O_TRUNC);
   $fd = openfd($fn, O_CREAT|O_WRONLY, 0640);
+  # Permission bit constants in POSIX::1003::FS
 
   my $buf;
   $bytes_read    = readfd($fd, $buf, BUFSIZ);
@@ -61,27 +65,31 @@ For all people who do not trust the C<sys*> commands (and there are
 many), we provide the implementation of POSIX-in-Core with a less
 confusing name to avoid accidents.
 
- POSIX   Perl-Core POSIX.pm POSIX::1003::FdIO
- fseek   seek
- lseek   sysseek   lseek    seekfd
- fopen   open
- open    sysopen            openfd  # sysopen clumpsy
- fdopen                             # IO::Handle->new_from_fd
- fclose  close
- close   close     close    closefd
- fread   read
- read    sysread   read     readfd
- fwrite  write
- write   syswrite  write    writefd
- pipe              pipe     pipefd
-         pipe,open                  # buffered unless $|=0
- creat             creat    creatfd
- dup                        dupfd
- stat    stat
- fstat             fstat    statfd
- lstat   lstat
- ftell   tell
-                            tellfd  # tell on fd not in POSIX
+    POSIX   Perl-Core POSIX.pm POSIX::1003::FdIO
+ FH fseek   seek
+ FD lseek   sysseek   lseek    seekfd
+ FH fopen   open
+ FD open    sysopen            openfd   # sysopen is clumpsy
+ FD fdopen                              # IO::Handle->new_from_fd
+ FH fclose  close
+ FD close   close     close    closefd
+ FH fread   read
+ FD read    sysread   read     readfd
+ FH fwrite  write
+ FD write   syswrite  write    writefd
+ FH         pipe,open                   # buffered unless $|=0
+ FD pipe              pipe     pipefd
+ FH stat    stat
+ FD fstat             fstat    statfd
+ FN lstat   lstat
+ FH ftell   tell
+ FD                            tellfd   # tell on fd not in POSIX
+ FH rewind            rewind
+ FD                            rewindfd # idem
+ FD creat             creat    creatfd
+ FD dup                        dupfd
+
+Works on: FH=file handle, FD=file descriptor, FN=file name
 
 =head2 Standard POSIX
 
@@ -113,9 +121,12 @@ The new fd is returned, undef on failure.
 
 =item B<openfd>(FILENAME, FLAGS, MODE)
 
-Returned is an integer file descriptor (FD). FLAGS are composed
-from the C<O_*> constants defined by Fcntl (import tag C<:mode>)
-The MODE combines C<S_I*> constants from that same module.
+Returned is an integer file descriptor (FD).  Returns C<undef> on
+failure (and '0' is a valid FD!)
+
+FLAGS are composed from the C<O_*> constants defined by this module (import
+tag C<:mode>) The MODE field combines C<S_I*> constants defined by
+L<POSIX::1003::FS|POSIX::1003::FS> (import tag C<:stat>).
 
 =item B<pipefd>()
 
@@ -127,11 +138,17 @@ Returns the reader and writer file descriptors.
 =item B<readfd>(FD, SCALAR, [LENGTH])
 
 Read the maximum of LENGTH bytes from FD into the SCALAR. Returned is
-the actual number of bytes read.
+the actual number of bytes read.  The value C<-1> tells you there is
+an error, reported in C<$!>
+
+B<Be warned> that a returned value smaller than LENGTH does not mean
+that the FD has nothing more to offer: the end is reached only when 0
+(zero) is returned.  Therefore, this reading is quite inconvenient.
+You may want to use POSIX::Util subroutine readfd_all
 
 =item B<seekfd>(FD, OFFSET, WHENCE)
 
-The WHENCE is a C<SEEK_*> constant from Fcntl
+The WHENCE is a C<SEEK_*> constant.
 
 =item B<statfd>(FD)
 
@@ -141,10 +158,12 @@ the same list of values as C<stat> on filenames.
 =item B<writefd>(FD, BYTES, [LENGTH])
 
 Attempt to write the first LENGTH bytes of STRING to FD. Returned is
-the number of bytes actually written. The number of bytes written
-can be less than LENGTH without an error condition: you have to call
-write again with the remaining bytes. You have an error only when C<-1>
+the number of bytes actually written.  You have an error only when C<-1>
 is returned.
+
+The number of bytes written can be less than LENGTH without an error
+condition: you have to call write again with the remaining bytes.  This
+is quite inconvenient. You may want to use POSIX::Util subroutine readfd_all
 
 =back
 
@@ -155,17 +174,9 @@ code.
 
 =over 4
 
-=item B<readfd_all>(FD, [SIZE, [DO_CLOSE]])
+=item B<rewindfd>(FD)
 
-Read all remaining bytes from the FD.  At most SIZE bytes are read,
-which defaults to SSIZE_MAX.
-
-The maximum SIZE would be SSIZE_MAX, but POSIX.xs pre-allocs a buffer
-with that size, so 2^64 is too large. We will read in convenient
-
-  my $in = openfd $filename, O_RDONLY;
-  my $d  = readfd_all $in, undef, 1;
-  defined $d or die "cannot read from $filename: $!\n";
+Seek to the beginning of the file
 
 =item B<tellfd>(FD)
 
@@ -173,24 +184,12 @@ Reports the location in the file. This call does not exist (not in POSIX,
 nor on other UNIXes), however is a logical counterpart of the C<tell()> on
 filenames.
 
-=item B<writefd_all>(FD, BYTES, [DO_CLOSE])
-
-Be sure that BYTES have the utf-8 flag off! We are working with bytes
-here, not strings.  Returns false if something went wrong (error in C<$!>)
-The FD will get closed when DO_CLOSE is provided and true.
-
-example: 
-
-  my $out = creatfd $outfile, 0600;
-  writefd_all $out, $bytes, 1
-      or die "write to $outfile failed: $!\n";
-
 =back
 
 =head1 CONSTANTS
 
 The following constants are exported, shown here with the values
-discovered during installation of this module:
+discovered during installation of this module.
 
 =for comment
 #TABLE_FDIO_START
@@ -198,12 +197,35 @@ discovered during installation of this module:
   BUFSIZ         8192
   EOF            -1
   MAX_INPUT      255
+  O_APPEND       1024
+  O_ASYNC        8192
+  O_CLOEXEC      524288
+  O_CREAT        64
+  O_DIRECT       16384
+  O_DIRECTORY    65536
+  O_DSYNC        4096
+  O_EXCL         128
+  O_FSYNC        4096
+  O_LARGEFILE    0
+  O_NDELAY       2048
+  O_NOATIME      262144
+  O_NOCTTY       256
+  O_NOFOLLOW     131072
+  O_NONBLOCK     2048
+  O_RDONLY       0
+  O_RDWR         2
+  O_RSYNC        4096
+  O_SYNC         4096
+  O_TRUNC        512
+  O_WRONLY       1
   PIPE_BUF       4096
+  SEEK_CUR       1
+  SEEK_END       2
+  SEEK_SET       0
   SSIZE_MAX      9223372036854775807
   STDERR_FILENO  2
   STDIN_FILENO   0
   STDOUT_FILENO  1
-  STREAM_MAX     undef
 
 
 =for comment
@@ -211,11 +233,18 @@ discovered during installation of this module:
 
 
 
+
+
+You can limit the import to the C<SEEK_*> constants by explicitly
+using the C<:seek> import tag.  Use the C<:mode> for all C<O_*>
+constants, to be used with L<openfd()|POSIX::1003::FdIO/"Standard POSIX">.
+
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.12,
-built on May 18, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
-is released with Perl itself.
+This module is part of POSIX-1003 distribution version 0.13,
+built on July 26, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+is released with Perl itself.  See also M<POSIX::Util> for
+additional functionality.
 
 =head1 COPYRIGHTS
 
