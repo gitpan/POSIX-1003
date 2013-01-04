@@ -71,15 +71,15 @@ L<POSIX::1003::Signals::sigaction()|POSIX::1003::Signals/"Standard POSIX">:
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.13,
-built on July 26, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
-is released with Perl itself.  See also M<POSIX::Util> for
+This module is part of POSIX-1003 distribution version 0.91,
+built on January 04, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 
 =head1 COPYRIGHTS
 
-Copyrights of the perl code and the related documentation by
-2011-2012 by [Mark Overmeer]. For other contributors see ChangeLog.
+Copyrights 2011-2013 on the perl code and the related documentation
+ by [Mark Overmeer]. For other contributors see ChangeLog.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

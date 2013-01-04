@@ -1,4 +1,4 @@
-# Copyrights 2011-2012 by [Mark Overmeer].
+# Copyrights 2011-2013 by [Mark Overmeer].
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
 # Pod stripped from pm file by OODoc 2.00.
@@ -7,9 +7,9 @@ use strict;
 
 package POSIX::1003::Termios;
 use vars '$VERSION';
-$VERSION = '0.13';
+$VERSION = '0.91';
 
-use base 'POSIX::1003', 'POSIX::Termios';
+use base 'POSIX::1003::Module', 'POSIX::Termios';
 
 my @speed = qw/
  B0 B110 B1200 B134 B150 B1800 B19200 B200 B2400

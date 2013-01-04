@@ -63,7 +63,7 @@ that there is a perl core function which does similar things as the
 POSIX function.  On most platforms you can easily find the perlfunc
 descriptions via L<perldoc>.  For instance:
 
-  perldoc -f write
+  perldoc -f open
 
 Another important source for Operating System facts are global variables.
 Those are described in the L<perlvar> manual.  Those variables have
@@ -992,7 +992,7 @@ Comparible functionality for functions which never made it into POSIX:
   l64a                            MIME::Base64/decode
   memccpy      $b = $1 if $a =~ m/(.*{,n}?)(?:c|$)/
   signgam      math, probably not supported
-  strptime                        POSIX::strptime
+  strptime                        Time::Piece
   swab         ($b,$a) = ($a,$b)
   timezone                        ::Time/tzname
   toascii      $c & 0x7f
@@ -1141,19 +1141,17 @@ POSIX also defines zillions of constants. They are listed in
 (and available via) the C<POSIX::1003> modules. The C<_POSIX_>
 constants can be read via L<POSIX::1003::Properties>.
 
-=back
-
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.13,
-built on July 26, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
-is released with Perl itself.  See also M<POSIX::Util> for
+This module is part of POSIX-1003 distribution version 0.91,
+built on January 04, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 
 =head1 COPYRIGHTS
 
-Copyrights of the perl code and the related documentation by
-2011-2012 by [Mark Overmeer]. For other contributors see ChangeLog.
+Copyrights 2011-2013 on the perl code and the related documentation
+ by [Mark Overmeer]. For other contributors see ChangeLog.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

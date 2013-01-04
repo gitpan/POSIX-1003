@@ -3,6 +3,7 @@ ChangeLog
 MANIFEST
 Makefile.PL
 PODTAIL.txt
+README
 TODO
 lib/POSIX/1003.pm
 lib/POSIX/1003.pod
@@ -20,6 +21,8 @@ lib/POSIX/1003/Locale.pm
 lib/POSIX/1003/Locale.pod
 lib/POSIX/1003/Math.pm
 lib/POSIX/1003/Math.pod
+lib/POSIX/1003/Module.pm
+lib/POSIX/1003/Module.pod
 lib/POSIX/1003/OS.pm
 lib/POSIX/1003/OS.pod
 lib/POSIX/1003/Pathconf.pm
@@ -36,9 +39,6 @@ lib/POSIX/1003/Termios.pm
 lib/POSIX/1003/Termios.pod
 lib/POSIX/1003/Time.pm
 lib/POSIX/1003/Time.pod
-lib/POSIX/3.pm
-lib/POSIX/3.pod
-lib/POSIX/3/Symbols.pm
 lib/POSIX/Overview.pod
 lib/POSIX/SigAction.pm
 lib/POSIX/SigAction.pod
@@ -57,6 +57,8 @@ lists/sysconf.txt
 lists/ulimit.txt
 manuals.PL
 symbols.PL
+system/darwin.c
+system/hpux.c
 system/linux.c
 t/01use.t
 t/20math.t

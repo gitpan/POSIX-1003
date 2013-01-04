@@ -1,37 +1,29 @@
 =head1 NAME
 
-POSIX::1003 - POSIX 1003.1 extensions to Perl
-
-=head1 INHERITANCE
-
- POSIX::1003 is extended by
-   POSIX::1003::Confstr
-   POSIX::1003::Events
-   POSIX::1003::FS
-   POSIX::1003::FdIO
-   POSIX::1003::Limit
-   POSIX::1003::Locale
-   POSIX::1003::Math
-   POSIX::1003::OS
-   POSIX::1003::Pathconf
-   POSIX::1003::Proc
-   POSIX::1003::Properties
-   POSIX::1003::Signals
-   POSIX::1003::Sysconf
-   POSIX::1003::Termios
-   POSIX::1003::Time
+POSIX::1003 - bulk-load POSIX::1003 symbols
 
 =head1 SYNOPSIS
 
-   # use the specific extensions
-   # and see POSIX::Overview and POSIX::3
+  use POSIX::1003  qw(:termios :pc PATH_MAX);
+  # is short for all of these:
+  use POSIX::1003::Termios  qw(:all);
+  use POSIX::1003::Pathconf qw(:all);
+  use POSIX::1003::FS       qw(PATH_MAX);
+
+  # overview about all exported symbols (by a module)
+  show_posix_names 'POSIX::1003::Pathconf';
+  show_posix_names ':pc';
+  perl -MPOSIX::1003 'show_posix_names'
 
 =head1 DESCRIPTION
 
-The POSIX module in I<core> (distributed with Perl itself) is ancient,
-the documentation is usually wrong, and it has too much unusable code in it.
-C<POSIX::1003> tries to provide cleaner access to the operating
-system.  More about the choices made can be found in section L</Rationale>,
+The L<POSIX::1003|POSIX::1003> suite implements access to many POSIX functions. The
+POSIX module in I<core> (distributed with Perl itself) is ancient, the
+documentation is usually wrong, and it has too much unusable code in it.
+C<POSIX::1003> tries to provide cleaner access to the operating system.
+More about the choices made can be found in section L</Rationale>.
+
+=head2 POSIX
 
 The official POSIX standard is large, with over 1200 functions;
 L<POSIX::Overview|POSIX::Overview> does list them all. This collection of C<POSIX::1003>
@@ -43,33 +35,77 @@ B<Start looking in POSIX::Overview>, to discover which module
 provides certain functionality. You may also guess the location from
 the module names listed in L</DETAILS>, below.
 
-=head2 Exporter
+=head2 Bulk loading
 
-All modules provide a C<:constants> and a C<:functions> tag, sometimes
-more.  The default is C<:all>, which means: everthing. You may also
-specify C<:none> (of course: nothing).
+It can be quite some work to work-out which modules define what symbols
+and then write down all the explicit C<require> lines. Using bulk loading
+via this C<POSIX::1003> will be slower during the import (because it needs
+to load the location of each of the hundreds of symbols into memory),
+but provides convenience: it loads the right modules automagically.
 
-When the import list is preceeded by C<+1>, the symbols will get published
-into the namespace of the caller namespace.
+=head3 Exporter
 
-  use POSIX::1003::Pathconf;
-  use POSIX::1003::Pathconf ':all';  # same
-  use POSIX::3 ':pc';                # same, for the lazy
-  use POSIX::3 ':pathconf';          # same, less lazy
+This module uses nasty export tricks, so is not based in Exporter.
+Some modules have more than one tag related to them, and one tag may
+load multiple modules. When you do not specify symbol or tag, then B<all>
+are loaded into your namespace(!), the same behavior as POSIX has.
+
+If your import list starts with C<+1>, the symbols will not get into
+your own namespace, but that of your caller. Just like
+C<$Exporter::ExportLevel> (but a simpler syntax).
+
+  use POSIX::1003 ':pathconf';
+  use POSIX::1003 ':pc';       # same, abbreviated name
+
+  use POSIX::1003 qw(PATH_MAX :math sin);
 
   sub MyModule::import(@)   # your own tricky exporter
-  {   POSIX::1003::Pathconf->import('+1', @_);
+  {   POSIX::1003->import('+1', @_);
   }
 
-=head1 METHODS
+=head3 EXPORT_TAGS
+
+  :all                  (all symbols, default)
+  :cs      :confstr     POSIX::1003::Confstr
+  :ev      :events      POSIX::1003::Events
+  :fd      :fdio        POSIX::1003::FdIO
+  :fs      :filesystem  POSIX::1003::FS
+  :limit   :limits      POSIX::1003::Limit
+  :locale               POSIX::1003::Locale
+  :math                 POSIX::1003::Math
+  :none                 (nothing)
+  :os      :opsys       POSIX::1003::OS
+  :pc      :pathconf    POSIX::1003::Pathconf
+  :proc    :processes   POSIX::1003::Proc
+  :props   :properties  POSIX::1003::Properties
+  :posix   :property    POSIX::1003::Properties
+  :sc      :sysconf     POSIX::1003::Sysconf
+  :signals              POSIX::1003::Signals
+  :signals :sigaction   POSIX::SigAction
+  :signals :sigset      POSIX::SigSet
+  :termio  :termios     POSIX::1003::Termios
+  :time                 POSIX::1003::Time
+
+=head1 FUNCTIONS
 
 =over 4
 
-=item POSIX::1003-E<gt>B<exampleValue>(NAME)
+=item B<posix_1003_modules>()
 
-Returns an example value for the NAMEd variable. Often, this is a
-compile-time or runtime constant. For some extensions, like C<::Pathconf>,
-that may not be the case.
+Returns the names of all modules in the current release of POSIX::1003.
+
+=item B<posix_1003_names>([MODULES|TAGS])
+
+Returns  all the names, when in LIST content.  In SCALAR context,
+it returns (a reference to) an HASH which contains exported names
+to modules mappings.  If no explicit MODULES are specified, then all
+available modules are taken.
+
+=item B<show_posix_names>([MODULES|TAGS])
+
+Print all names defined by the POSIX::1003 suite in alphabetical
+(case-insensitive) order. If no explicit MODULES are specified, then all
+available modules are taken.
 
 =back
 
@@ -242,15 +278,15 @@ of a constant.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.13,
-built on July 26, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
-is released with Perl itself.  See also M<POSIX::Util> for
+This module is part of POSIX-1003 distribution version 0.91,
+built on January 04, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 
 =head1 COPYRIGHTS
 
-Copyrights of the perl code and the related documentation by
-2011-2012 by [Mark Overmeer]. For other contributors see ChangeLog.
+Copyrights 2011-2013 on the perl code and the related documentation
+ by [Mark Overmeer]. For other contributors see ChangeLog.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.

@@ -1,4 +1,4 @@
-# Copyrights 2011-2012 by [Mark Overmeer].
+# Copyrights 2011-2013 by [Mark Overmeer].
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
 # Pod stripped from pm file by OODoc 2.00.
@@ -7,18 +7,13 @@ use strict;
 
 package POSIX::1003::Proc;
 use vars '$VERSION';
-$VERSION = '0.13';
+$VERSION = '0.91';
 
-use base 'POSIX::1003';
+use base 'POSIX::1003::Module';
 
 # Blocks resp. in stdlib.h, limits.h
-my @constants = qw/
- EXIT_FAILURE EXIT_SUCCESS
-
- CHILD_MAX
- /;
-
-our @IN_CORE   = qw/wait waitpid/;
+my @constants = qw/EXIT_FAILURE EXIT_SUCCESS CHILD_MAX /;
+our @IN_CORE  = qw/wait waitpid/;
 
 # Blocks resp. in stdlib.h, sys/wait.h, unistd.h
 my @functions = qw/

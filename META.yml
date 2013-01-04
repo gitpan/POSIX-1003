@@ -23,4 +23,4 @@ requires:
   POSIX: 0
   Test::More: 0.47
   XSLoader: 0
-version: 0.13
+version: 0.91

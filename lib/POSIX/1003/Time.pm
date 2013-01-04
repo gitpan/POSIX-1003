@@ -1,4 +1,4 @@
-# Copyrights 2011-2012 by [Mark Overmeer].
+# Copyrights 2011-2013 by [Mark Overmeer].
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
 # Pod stripped from pm file by OODoc 2.00.
@@ -7,14 +7,13 @@ use strict;
 
 package POSIX::1003::Time;
 use vars '$VERSION';
-$VERSION = '0.13';
+$VERSION = '0.91';
 
-use base 'POSIX::1003';
+use base 'POSIX::1003::Module';
 
 # Blocks resp. defined in time.h, limits.h
 my @constants = qw/
   CLK_TCK CLOCKS_PER_SEC NULL
-
   TZNAME_MAX
  /;
 

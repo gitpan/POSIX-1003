@@ -5,7 +5,7 @@ POSIX::1003::Signals - POSIX using signals
 =head1 INHERITANCE
 
  POSIX::1003::Signals
-   is a POSIX::1003
+   is a POSIX::1003::Module
 
 =head1 SYNOPSIS
 
@@ -27,15 +27,17 @@ This manual page explains the access to the POSIX C<sigaction>
 functions and its relatives. This module uses two helper objects:
 L<POSIX::SigSet|POSIX::SigSet> and L<POSIX::SigAction|POSIX::SigAction>.
 
-=head2 Exporter
-
 =head1 METHODS
 
 =over 4
 
 =item POSIX::1003::Signals-E<gt>B<exampleValue>(NAME)
 
-See L<POSIX::1003/"METHODS">
+See L<POSIX::1003::Module/"METHODS">
+
+=item $obj-E<gt>B<import>()
+
+See L<POSIX::1003::Module/"METHODS">
 
 =back
 
@@ -190,15 +192,15 @@ discovered during installation of this module:
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.13,
-built on July 26, 2012. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
-is released with Perl itself.  See also M<POSIX::Util> for
+This module is part of POSIX-1003 distribution version 0.91,
+built on January 04, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 
 =head1 COPYRIGHTS
 
-Copyrights of the perl code and the related documentation by
-2011-2012 by [Mark Overmeer]. For other contributors see ChangeLog.
+Copyrights 2011-2013 on the perl code and the related documentation
+ by [Mark Overmeer]. For other contributors see ChangeLog.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
