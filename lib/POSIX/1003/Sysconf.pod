@@ -2,11 +2,6 @@
 
 POSIX::1003::Sysconf - POSIX access to sysconf()
 
-=head1 INHERITANCE
-
- POSIX::1003::Sysconf
-   is a POSIX::1003::Module
-
 =head1 SYNOPSIS
 
   use POSIX::1003::Sysconf; # load all names
@@ -29,20 +24,6 @@ POSIX::1003::Sysconf - POSIX access to sysconf()
 
 The C<sysconf()> interface can be used to query system information
 in numerical form, where C<confstr()> returns strings.
-
-=head1 METHODS
-
-=over 4
-
-=item POSIX::1003::Sysconf-E<gt>B<exampleValue>(NAME)
-
-See L<POSIX::1003::Module/"METHODS">
-
-=item $obj-E<gt>B<import>()
-
-See L<POSIX::1003::Module/"METHODS">
-
-=back
 
 =head1 FUNCTIONS
 
@@ -113,7 +94,7 @@ where returned at that time.
   _SC_ARG_MAX                       2097152
   _SC_ASYNCHRONOUS_IO               200809
   _SC_ATEXIT_MAX                    2147483647
-  _SC_AVPHYS_PAGES                  80321
+  _SC_AVPHYS_PAGES                  104973
   _SC_BARRIERS                      200809
   _SC_BASE                          undef
   _SC_BC_BASE_MAX                   99
@@ -126,7 +107,7 @@ where returned at that time.
   _SC_CHAR_MAX                      127
   _SC_CHAR_MIN                      -128
   _SC_CHARCLASS_NAME_MAX            2048
-  _SC_CHILD_MAX                     27004
+  _SC_CHILD_MAX                     61461
   _SC_CLK_TCK                       100
   _SC_CLOCK_SELECTION               200809
   _SC_COLL_WEIGHTS_MAX              255
@@ -151,18 +132,18 @@ where returned at that time.
   _SC_IOV_MAX                       1024
   _SC_IPV6                          200809
   _SC_JOB_CONTROL                   1
-  _SC_LEVEL1_DCACHE_ASSOC           2
+  _SC_LEVEL1_DCACHE_ASSOC           8
   _SC_LEVEL1_DCACHE_LINESIZE        64
-  _SC_LEVEL1_DCACHE_SIZE            65536
-  _SC_LEVEL1_ICACHE_ASSOC           2
+  _SC_LEVEL1_DCACHE_SIZE            32768
+  _SC_LEVEL1_ICACHE_ASSOC           8
   _SC_LEVEL1_ICACHE_LINESIZE        64
-  _SC_LEVEL1_ICACHE_SIZE            65536
-  _SC_LEVEL2_CACHE_ASSOC            16
+  _SC_LEVEL1_ICACHE_SIZE            32768
+  _SC_LEVEL2_CACHE_ASSOC            8
   _SC_LEVEL2_CACHE_LINESIZE         64
-  _SC_LEVEL2_CACHE_SIZE             524288
-  _SC_LEVEL3_CACHE_ASSOC            0
-  _SC_LEVEL3_CACHE_LINESIZE         0
-  _SC_LEVEL3_CACHE_SIZE             0
+  _SC_LEVEL2_CACHE_SIZE             262144
+  _SC_LEVEL3_CACHE_ASSOC            12
+  _SC_LEVEL3_CACHE_LINESIZE         64
+  _SC_LEVEL3_CACHE_SIZE             6291456
   _SC_LEVEL4_CACHE_ASSOC            0
   _SC_LEVEL4_CACHE_LINESIZE         0
   _SC_LEVEL4_CACHE_SIZE             0
@@ -187,14 +168,14 @@ where returned at that time.
   _SC_NL_NMAX                       2147483647
   _SC_NL_SETMAX                     2147483647
   _SC_NL_TEXTMAX                    2147483647
-  _SC_NPROCESSORS_CONF              2
-  _SC_NPROCESSORS_ONLN              2
+  _SC_NPROCESSORS_CONF              4
+  _SC_NPROCESSORS_ONLN              4
   _SC_NZERO                         20
   _SC_OPEN_MAX                      1024
   _SC_PAGE_SIZE                     4096
   _SC_PAGESIZE                      4096
   _SC_PASS_MAX                      8192
-  _SC_PHYS_PAGES                    884221
+  _SC_PHYS_PAGES                    1971261
   _SC_PII                           undef
   _SC_PII_INTERNET                  undef
   _SC_PII_INTERNET_DGRAM            undef
@@ -228,7 +209,7 @@ where returned at that time.
   _SC_SHRT_MAX                      32767
   _SC_SHRT_MIN                      -32768
   _SC_SIGNALS                       undef
-  _SC_SIGQUEUE_MAX                  27004
+  _SC_SIGQUEUE_MAX                  61461
   _SC_SINGLE_PROCESS                undef
   _SC_SPAWN                         200809
   _SC_SPIN_LOCKS                    200809
@@ -317,8 +298,8 @@ where returned at that time.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.91,
-built on January 04, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.92,
+built on February 25, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

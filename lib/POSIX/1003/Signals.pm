@@ -1,30 +1,30 @@
 # Copyrights 2011-2013 by [Mark Overmeer].
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
-# Pod stripped from pm file by OODoc 2.00.
+# Pod stripped from pm file by OODoc 2.01.
 use warnings;
 use strict;
 
 package POSIX::1003::Signals;
 use vars '$VERSION';
-$VERSION = '0.91';
+$VERSION = '0.92';
 
 use base 'POSIX::1003::Module';
 
 my @signals;
 my @states  = qw/
- SIG_BLOCK SIG_DFL SIG_ERR
- SIG_IGN SIG_SETMASK SIG_UNBLOCK
+    SIG_BLOCK SIG_DFL SIG_ERR
+    SIG_IGN SIG_SETMASK SIG_UNBLOCK
  /;
 
 my @actions = qw/
- SA_NOCLDSTOP SA_NOCLDWAIT SA_NODEFER SA_ONSTACK SA_RESETHAND SA_RESTART
- SA_SIGINFO
+    SA_NOCLDSTOP SA_NOCLDWAIT SA_NODEFER SA_ONSTACK SA_RESETHAND SA_RESTART
+    SA_SIGINFO
  /;
 
 my @functions = qw/
- raise sigaction signal sigpending sigprocmask sigsuspend signal
- signal_names
+    raise sigaction signal sigpending sigprocmask sigsuspend signal
+    signal_names strsignal
  /;
 
 my @constants = (@signals, @states, @actions);
@@ -61,6 +61,7 @@ sub sigpending($)     {goto &POSIX::sigpending }
 sub sigprocmask($$;$) {goto &POSIX::sigprocmask }
 sub sigsuspend($)     {goto &POSIX::sigsuspend }
 sub signal($$)        { $SIG{$_[0]} = $_[1] }
+sub strsignal($)      { _strsignal($_[0]) || "Unknown signal $_[0]" }
 
 #--------------------------
 

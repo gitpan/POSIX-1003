@@ -1,19 +1,20 @@
 # Copyrights 2011-2013 by [Mark Overmeer].
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
-# Pod stripped from pm file by OODoc 2.00.
+# Pod stripped from pm file by OODoc 2.01.
 use strict;
 use warnings;
 
 package POSIX::1003::Module;
 use vars '$VERSION';
-$VERSION = '0.91';
+$VERSION = '0.92';
 
 
-our $VERSION = '0.91';
+our $VERSION = '0.92';
 use Carp 'croak';
 
 { use XSLoader;
+  no warnings 'redefine';
   XSLoader::load 'POSIX';
   XSLoader::load 'POSIX::1003', $VERSION;
 }
@@ -136,7 +137,7 @@ sub exampleValue($)
 
 package POSIX::1003::ReadOnlyTable;
 use vars '$VERSION';
-$VERSION = '0.91';
+$VERSION = '0.92';
 
 sub TIEHASH($) { bless $_[1], $_[0] }
 sub FETCH($)   { $_[0]->{$_[1]} }

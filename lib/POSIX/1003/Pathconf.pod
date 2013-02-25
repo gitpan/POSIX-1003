@@ -2,11 +2,6 @@
 
 POSIX::1003::Pathconf - POSIX access to pathconf()
 
-=head1 INHERITANCE
-
- POSIX::1003::Pathconf
-   is a POSIX::1003::Module
-
 =head1 SYNOPSIS
 
   use POSIX::1003::Pathconf;   # import all
@@ -35,20 +30,6 @@ POSIX::1003::Pathconf - POSIX access to pathconf()
 
 With C<pathconf()> you query filesystem limits for a certain existing
 location.
-
-=head1 METHODS
-
-=over 4
-
-=item POSIX::1003::Pathconf-E<gt>B<exampleValue>(NAME)
-
-See L<POSIX::1003::Module/"METHODS">
-
-=item $obj-E<gt>B<import>()
-
-See L<POSIX::1003::Module/"METHODS">
-
-=back
 
 =head1 FUNCTIONS
 
@@ -100,7 +81,7 @@ where returned for a random file at the time.
   _PC_ASYNC_IO            1       _PC_REC_INCR_XFER_SIZE  undef
   _PC_CHOWN_RESTRICTED    1       _PC_REC_MAX_XFER_SIZE   undef
   _PC_FILESIZEBITS        64      _PC_REC_MIN_XFER_SIZE   4096
-  _PC_LINK_MAX            32000   _PC_REC_XFER_ALIGN      4096
+  _PC_LINK_MAX            65000   _PC_REC_XFER_ALIGN      4096
   _PC_MAX_CANON           255     _PC_SOCK_MAXBUF         undef
   _PC_MAX_INPUT           255     _PC_SYMLINK_MAX         undef
   _PC_NAME_MAX            255     _PC_SYNC_IO             undef
@@ -117,8 +98,8 @@ where returned for a random file at the time.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.91,
-built on January 04, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.92,
+built on February 25, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

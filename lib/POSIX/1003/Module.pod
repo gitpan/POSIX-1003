@@ -2,29 +2,15 @@
 
 POSIX::1003::Module - Base of POSIX::1003 components
 
-=head1 INHERITANCE
-
- POSIX::1003::Module is extended by
-   POSIX::1003::Confstr
-   POSIX::1003::Events
-   POSIX::1003::FS
-   POSIX::1003::FdIO
-   POSIX::1003::Limit
-   POSIX::1003::Locale
-   POSIX::1003::Math
-   POSIX::1003::OS
-   POSIX::1003::Pathconf
-   POSIX::1003::Proc
-   POSIX::1003::Properties
-   POSIX::1003::Signals
-   POSIX::1003::Sysconf
-   POSIX::1003::Termios
-   POSIX::1003::Time
-
 =head1 SYNOPSIS
 
    # use the specific extensions
    # and see POSIX::Overview and POSIX::1003
+
+=head1 DESCRIPTION
+
+The POSIX functions and constants are provided via extensions of this
+module.  This module itself only facilitates those implementations.
 
 =head1 METHODS
 
@@ -58,8 +44,8 @@ into the namespace of your caller namespace, not your own namespace.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.91,
-built on January 04, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.92,
+built on February 25, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

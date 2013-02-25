@@ -849,7 +849,7 @@ L<POSIX::SigSet>. Take a look at those manuals.
   sigprocmask                     ::Signals
   sigsuspend                      ::Signals
   sigwait      not supported
-  strsignal    not supported
+  strsignal                       ::Signals
 
 B<Warning>, parameter order in POSIX.pm
 
@@ -1143,8 +1143,8 @@ constants can be read via L<POSIX::1003::Properties>.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.91,
-built on January 04, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.92,
+built on February 25, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

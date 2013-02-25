@@ -1,13 +1,13 @@
 # Copyrights 2011-2013 by [Mark Overmeer].
 #  For other contributors see ChangeLog.
 # See the manual pages for details on the licensing terms.
-# Pod stripped from pm file by OODoc 2.00.
+# Pod stripped from pm file by OODoc 2.01.
 use warnings;
 use strict;
 
 package POSIX::1003::Confstr;
 use vars '$VERSION';
-$VERSION = '0.91';
+$VERSION = '0.92';
 
 use base 'POSIX::1003::Module';
 
@@ -24,6 +24,7 @@ our %EXPORT_TAGS =
 
 my  $confstr;
 our %confstr;
+sub confstr($);
 
 BEGIN {
     # initialize the :constants export tag
@@ -31,8 +32,6 @@ BEGIN {
     push @constants, keys %$confstr;
     tie %confstr, 'POSIX::1003::ReadOnlyTable', $confstr;
 }
-
-sub confstr($);
 
 
 sub exampleValue($)
