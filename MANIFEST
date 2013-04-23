@@ -33,6 +33,7 @@ lib/POSIX/1003/Properties.pm
 lib/POSIX/1003/Properties.pod
 lib/POSIX/1003/Signals.pm
 lib/POSIX/1003/Signals.pod
+lib/POSIX/1003/Symbols.pm
 lib/POSIX/1003/Sysconf.pm
 lib/POSIX/1003/Sysconf.pod
 lib/POSIX/1003/Termios.pm

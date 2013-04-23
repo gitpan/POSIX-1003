@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Signals;
 use vars '$VERSION';
-$VERSION = '0.92';
+$VERSION = '0.93';
 
 use base 'POSIX::1003::Module';
 
@@ -61,6 +61,7 @@ sub sigpending($)     {goto &POSIX::sigpending }
 sub sigprocmask($$;$) {goto &POSIX::sigprocmask }
 sub sigsuspend($)     {goto &POSIX::sigsuspend }
 sub signal($$)        { $SIG{$_[0]} = $_[1] }
+
 sub strsignal($)      { _strsignal($_[0]) || "Unknown signal $_[0]" }
 
 #--------------------------

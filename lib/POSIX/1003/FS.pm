@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::FS;
 use vars '$VERSION';
-$VERSION = '0.92';
+$VERSION = '0.93';
 
 use base 'POSIX::1003::Module';
 
@@ -31,13 +31,13 @@ sub S_ISWHT($)  { ($_[0] & S_IFMT()) == S_IFWHT()}  # FreeBSD
 
 # Blocks resp from sys/stat.h, unistd.h, utime.h, sys/types
 my @functions = qw/
- mkfifo mknod stat lstat
+ mkfifo mknod stat lstat rename
  access lchown
  utime
  major minor makedev
  /;
 
-our @IN_CORE     = qw(utime mkdir stat lstat);
+our @IN_CORE     = qw(utime mkdir stat lstat rename);
 
 our %EXPORT_TAGS =
  ( constants => \@constants

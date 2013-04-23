@@ -1,3 +1,5 @@
+=encoding utf8
+
 =head1 NAME
 
 POSIX::1003::FS - POSIX for the file-system
@@ -64,6 +66,12 @@ Create a special device node on PATH. Useful symbols for MODE can be
 collected from Fcntl (import tag C<:mode>).  The DEVICE number is
 a combination from the type (I<major> number), a sequence number and
 usage information (combined in a I<minor> number).
+
+=item B<rename>(OLDNAME, NEWNAME)
+
+[0.93] This will use C<CORE::rename()>.  Be warned that Window's C<rename>
+implementation will fail when NEWNAME exists, which is not POSIX compliant.
+On many platforms, C<rename> between different partitions is not allowed.
 
 =item B<utime>(ATIME, MTIME, FILENAMES)
 
@@ -153,8 +161,8 @@ The C<*_OK> tags can be imported with C<:access> =cut
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.92,
-built on February 25, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.93,
+built on April 23, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 
