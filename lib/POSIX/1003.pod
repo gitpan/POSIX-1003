@@ -69,6 +69,7 @@ C<$Exporter::ExportLevel> (but a simpler syntax).
 
   :all                  (all symbols, default)
   :cs      :confstr     POSIX::1003::Confstr
+  :errno   :errors      POSIX::1003::Errno
   :ev      :events      POSIX::1003::Events
   :fd      :fdio        POSIX::1003::FdIO
   :fs      :filesystem  POSIX::1003::FS
@@ -87,6 +88,7 @@ C<$Exporter::ExportLevel> (but a simpler syntax).
   :signals :sigset      POSIX::SigSet
   :termio  :termios     POSIX::1003::Termios
   :time                 POSIX::1003::Time
+  :user                 POSIX::1003::User
 
 =head1 FUNCTIONS
 
@@ -120,6 +122,10 @@ available modules are taken.
 =item L<POSIX::1003::Confstr|POSIX::1003::Confstr>
 
 Provide access to the C<_CS_*> constants.
+
+=item L<POSIX::1003::Errno|POSIX::1003::Errno>
+
+Provide access to the C<E*> constants, for error numbers, and strerror().
 
 =item L<POSIX::1003::FdIO|POSIX::1003::FdIO>
 
@@ -167,6 +173,10 @@ Terminal IO
 =item L<POSIX::1003::Time|POSIX::1003::Time>
 
 Time-stamp processing
+
+=item L<POSIX::1003::User|POSIX::1003::User>
+
+Change active user and group.
 
 =item L<POSIX::1003::Limit|POSIX::1003::Limit>
 
@@ -251,7 +261,7 @@ like CORE does.
 
 =item *
 
-hundreds of C<_SC_*>, C<_CS_*>, C<_PC_*>, C<_POSIX_*>, C<UL_*>,
+hundreds of C<E*>, C<_SC_*>, C<_CS_*>, C<_PC_*>, C<_POSIX_*>, C<UL_*>,
 and C<RLIMIT_*> constants were collected from various sources, not just
 a minimal subset. You get access to all defined on your system.
 
@@ -274,8 +284,8 @@ of a constant.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.93,
-built on April 23, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.94_1,
+built on May 16, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

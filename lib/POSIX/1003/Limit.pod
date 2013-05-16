@@ -43,6 +43,8 @@ This module provides access to the "ulimit" (user limit) and "rlimit"
 (resource limit) handling.  On most systems, C<ulimit()> is succeeded
 by C<rlimit()> hence provides a very limited set of features.
 
+=head1 METHODS
+
 =head1 FUNCTIONS
 
 =head2 Standard POSIX
@@ -155,8 +157,8 @@ L<getrlimit()|POSIX::1003::Limit/"Standard POSIX"> returned during installation 
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.93,
-built on April 23, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.94_1,
+built on May 16, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

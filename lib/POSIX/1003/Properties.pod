@@ -26,6 +26,8 @@ When you compile C/C++ programs, the header files provide you with
 a long list of C<_POSIX> constants. This module pass these values
 on to Perl.
 
+=head1 METHODS
+
 =head1 FUNCTIONS
 
 =head2 Standard POSIX
@@ -178,8 +180,8 @@ where returned at that time.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.93,
-built on April 23, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.94_1,
+built on May 16, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

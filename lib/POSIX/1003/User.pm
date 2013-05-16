@@ -5,24 +5,34 @@
 use warnings;
 use strict;
 
-package POSIX::1003::Time;
+package POSIX::1003::User;
 use vars '$VERSION';
 $VERSION = '0.94_1';
 
 use base 'POSIX::1003::Module';
 
-# Blocks resp. defined in time.h, limits.h
 my @constants = qw/
-  CLK_TCK CLOCKS_PER_SEC NULL
-  TZNAME_MAX
  /;
 
-our @IN_CORE  = qw/gmtime localtime/;
+our @IN_CORE  = qw/
+  getpwnam  getpwuid  getpwent
+  getgrnam  getgrgid  getgrent
+  getlogin
+  /;
 
 my @functions = qw/
-  asctime ctime strftime
-  clock difftime mktime
-  tzset tzname/;
+  getuid    setuid
+  geteuid   seteuid
+            setreuid
+  getresuid setresuid
+
+  getgid    setgid
+  getegid   setegid
+            setregid
+  getresgid setresgid
+  getgroups setgroups
+  /;
+
 push @functions, @IN_CORE;
 
 our %EXPORT_TAGS =
@@ -31,7 +41,9 @@ our %EXPORT_TAGS =
   );
 
 
-# Everything in POSIX.xs
+#------------------
+
+#------------------
 
 
 1;

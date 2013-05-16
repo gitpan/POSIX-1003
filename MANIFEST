@@ -9,6 +9,8 @@ lib/POSIX/1003.pm
 lib/POSIX/1003.pod
 lib/POSIX/1003/Confstr.pm
 lib/POSIX/1003/Confstr.pod
+lib/POSIX/1003/Errno.pm
+lib/POSIX/1003/Errno.pod
 lib/POSIX/1003/Events.pm
 lib/POSIX/1003/Events.pod
 lib/POSIX/1003/FS.pm
@@ -40,6 +42,8 @@ lib/POSIX/1003/Termios.pm
 lib/POSIX/1003/Termios.pod
 lib/POSIX/1003/Time.pm
 lib/POSIX/1003/Time.pod
+lib/POSIX/1003/User.pm
+lib/POSIX/1003/User.pod
 lib/POSIX/Overview.pod
 lib/POSIX/SigAction.pm
 lib/POSIX/SigAction.pod
@@ -47,6 +51,7 @@ lib/POSIX/SigSet.pm
 lib/POSIX/SigSet.pod
 lists.PL
 lists/confstr.txt
+lists/errno.txt
 lists/fdio.txt
 lists/fsys.txt
 lists/pathconf.txt
@@ -70,6 +75,9 @@ t/23locale.t
 t/24os.t
 t/25proc.t
 t/26time.t
+t/27signals.t
+t/28user.t
+t/29errno.t
 t/30sigaction.t
 t/31termios.t
 t/60sysconf.t

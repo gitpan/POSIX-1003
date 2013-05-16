@@ -909,16 +909,16 @@ B<Warning,> POSIX.pm accepts only one filename
 =head2 User and Group Interfaces
 
   cuserid                         ::Proc
-  getegid     perlvar/$EGID $)
-  geteuid     perlvar/$EUID $>
-  getgid      perlvar/$GID  $(  (split ' ', $GID)[0]
-  getgroups   perlvar/$GID  $(  split ' ', $GID
-  getlogin    perlfunc
-  getuid      perlvar/$UID  $<              # warning
-  setegid     perlvar/$EGID $)              # warning
-  seteuid     perlvar/$EUID $>              # warning
-  setgid      perlvar/$GID  $(    POSIX.pm  # warning
-  setuid      perlvar/$UID  $<    POSIX.pm  # warning
+  getegid     perlvar/$EGID $)    ::User
+  geteuid     perlvar/$EUID $>    ::User
+  getgid      perlvar/$GID  $(    ::User
+  getgroups   perlvar/$GID  $(    ::User
+  getlogin    perlfunc            ::User
+  getuid      perlvar/$UID  $<    ::User    # warning
+  setegid     perlvar/$EGID $)    ::User    # warning
+  seteuid     perlvar/$EUID $>    ::User    # warning
+  setgid      perlvar/$GID  $(    ::User    # warning
+  setuid      perlvar/$UID  $<    ::User    # warning
 
 B<Warning:> The special variables for user- and group-ids try to be smart:
 they are implemented using C<getreuid> and/or friends.  POSIX.pm provides
@@ -1125,9 +1125,16 @@ Log::Dispatch, or Log::Report.
   pututxline                      User::Utmp
   setgrent     perlfunc           User::grent
   setpwent     perlfunc           User::pwent
-  setregid     perlvar/$GID and $EGID
-  setreuid     perlvar/$UID and $EUID
+  setregid     perlvar/$GID,$EGID ::User
+  setreuid     perlvar/$UID,$EUID ::User
   setutxent                       User::Utmp
+
+Non-standard, but commonly available.  See also POSIX::User.
+
+  getresgid                       ::User
+  getresuid                       ::User
+  setresgid                       ::User
+  setresuid                       ::User
 
 =head2 XSI STREAMS Interfaces
 
@@ -1145,8 +1152,8 @@ constants can be read via L<POSIX::1003::Properties>.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.93,
-built on April 23, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.94_1,
+built on May 16, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

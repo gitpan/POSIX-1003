@@ -18,9 +18,8 @@ no_index:
     - t
     - inc
 requires:
-  Errno: 0
   File::Spec: 0
   POSIX: 0
   Test::More: 0.47
   XSLoader: 0
-version: 0.93
+version: 0.94_1

@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003;
 use vars '$VERSION';
-$VERSION = '0.93';
+$VERSION = '0.94_1';
 
 
 use Carp qw/croak/;
@@ -24,6 +24,8 @@ our (%EXPORT_TAGS, %IMPORT_FROM);
 my %tags =
   ( confstr =>     'POSIX::1003::Confstr'
   , cs =>          'POSIX::1003::Confstr'
+  , errno =>       'POSIX::1003::Errno'
+  , errors =>      'POSIX::1003::Errno'
   , events =>      'POSIX::1003::Events'
   , ev =>          'POSIX::1003::Events'
   , fdio =>        'POSIX::1003::FdIO'
@@ -52,6 +54,7 @@ my %tags =
   , termio =>      'POSIX::1003::Termios'
   , termios =>     'POSIX::1003::Termios'
   , time =>        'POSIX::1003::Time'
+  , user =>        'POSIX::1003::User'
   );
 
 my %mod_tag;

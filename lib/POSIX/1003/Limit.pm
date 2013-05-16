@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Limit;
 use vars '$VERSION';
-$VERSION = '0.93';
+$VERSION = '0.94_1';
 
 use base 'POSIX::1003::Module';
 
@@ -27,7 +27,6 @@ our (%ulimit, %rlimit);
 my  ($rlim_saved_max, $rlim_saved_cur, $rlim_infinity);
 
 BEGIN {
-    # initialize the :constants export tag
     my @ufuncs = qw/ulimit ulimit_names/;
     my @rfuncs = qw/getrlimit setrlimit rlimit_names/;
     my @rconst = qw/RLIM_SAVED_MAX RLIM_SAVED_CUR RLIM_INFINITY/;
@@ -43,7 +42,6 @@ BEGIN {
     push @constants, keys %$ulimit, keys %$rlimit;
     push @functions, @ufuncs, @rfuncs;
 
-    # Special meaning for
     $rlim_saved_max = delete $rlimit->{RLIM_SAVED_MAX};
     $rlim_saved_cur = delete $rlimit->{RLIM_SAVED_CUR};
     $rlim_infinity  = delete $rlimit->{RLIM_INFINITY};
