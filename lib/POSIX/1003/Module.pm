@@ -7,10 +7,10 @@ use warnings;
 
 package POSIX::1003::Module;
 use vars '$VERSION';
-$VERSION = '0.94_1';
+$VERSION = '0.94_2';
 
 
-our $VERSION = '0.94_1';
+our $VERSION = '0.94_2';
 use Carp 'croak';
 
 { use XSLoader;
@@ -139,7 +139,7 @@ sub exampleValue($)
 
 package POSIX::1003::ReadOnlyTable;
 use vars '$VERSION';
-$VERSION = '0.94_1';
+$VERSION = '0.94_2';
 
 sub TIEHASH($) { bless $_[1], $_[0] }
 sub FETCH($)   { $_[0]->{$_[1]} }

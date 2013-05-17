@@ -4,6 +4,14 @@
 
 POSIX::1003::Termios - POSIX general terminal interface
 
+=head1 INHERITANCE
+
+ POSIX::1003::Termios
+   is a POSIX::1003::Module
+
+ POSIX::1003::Termios
+   is a POSIX::Termios
+
 =head1 SYNOPSIS
 
   use POSIX::1003::Termios qw(:speed);
@@ -23,7 +31,23 @@ POSIX::1003::Termios - POSIX general terminal interface
 This module provides an interface to the "General Terminal Interfaces",
 as specified by POSIX. The actual implementation is part of POSIX.xs
 
+See L<documentation in base class|POSIX::1003::Module/"DESCRIPTION">.
+ 
 =head1 METHODS
+
+See L<documentation in base class|POSIX::1003::Module/"METHODS">.
+ 
+=over 4
+
+=item POSIX::1003::Termios-E<gt>B<exampleValue>(NAME)
+
+See L<POSIX::1003::Module/"METHODS">
+
+=item $obj-E<gt>B<import>()
+
+See L<POSIX::1003::Module/"METHODS">
+
+=back
 
 =head2 Constructors
 
@@ -243,8 +267,8 @@ of this module:
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.94_1,
-built on May 16, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.94_2,
+built on May 17, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

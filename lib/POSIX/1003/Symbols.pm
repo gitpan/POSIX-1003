@@ -9,7 +9,7 @@
 
 package POSIX::1003;
 use vars '$VERSION';
-$VERSION = '0.94_1';
+$VERSION = '0.94_2';
 
 
 our %EXPORT_TAGS = (

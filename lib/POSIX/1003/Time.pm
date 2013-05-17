@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Time;
 use vars '$VERSION';
-$VERSION = '0.94_1';
+$VERSION = '0.94_2';
 
 use base 'POSIX::1003::Module';
 

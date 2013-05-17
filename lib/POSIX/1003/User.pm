@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::User;
 use vars '$VERSION';
-$VERSION = '0.94_1';
+$VERSION = '0.94_2';
 
 use base 'POSIX::1003::Module';
 
@@ -40,6 +40,8 @@ our %EXPORT_TAGS =
   , functions => \@functions
   );
 
+
+#------------------
 
 #------------------
 
