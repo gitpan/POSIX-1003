@@ -139,6 +139,10 @@ L<POSIX::1003::FS|POSIX::1003::FS> (import tag C<:stat>).
 =item B<pipefd>()
 
 Returns the reader and writer file descriptors.
+See also L<POSIX::1003::Fcntl::setfd_pipe_size()|POSIX::1003::Fcntl/"Additional">
+
+example: 
+
   my ($r, $w) = pipefd;
   writefd($w, "hello", 5 );
   readfd($r, $buf, 5 );
@@ -205,6 +209,7 @@ discovered during installation of this module.
   BUFSIZ         8192
   EOF            -1
   MAX_INPUT      255
+  O_ACCMODE      3
   O_APPEND       1024
   O_ASYNC        8192
   O_CLOEXEC      524288
@@ -251,8 +256,8 @@ constants, to be used with L<openfd()|POSIX::1003::FdIO/"Standard POSIX">.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.94_2,
-built on May 17, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.94_3,
+built on June 10, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

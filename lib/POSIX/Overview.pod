@@ -211,7 +211,7 @@ L<perlunicode>, L<Encode> and L<encoding>.
   strcmp      perlop/cmp perlop/eq
   strcpy      perlop/=
   strcspn     $a =~ m/^([^$b]*)/ && length $1
-  strerror    perlvar/$ERRNO   "$!"
+  strerror    perlvar/$ERRNO      ::Errno   "$!"
   strlen      perlvar/length
   strncat     $a .= substr $b, 0, $n;
   strncmp     (substr $a, 0, $n) eq (substr $b, 0, $n)
@@ -285,10 +285,10 @@ automatically resolves character set problems.
 
 =head3 Math
 
-  abs          perlfunc/abs       ::Math/abs
+  abs          perlfunc           ::Math
   div                             ::Math
-  rand         perlfunc/rand      ::Math
-  srand        perlfunc/srand     ::Math
+  rand         perlfunc           ::Math
+  srand        perlfunc           ::Math
 
 Integers which overflow will automatically upgrade into floats, so all
 C<abs>, C<labs>, C<llabs>, C<imaxabs> are implemented by L<perfunc/abs>.
@@ -529,7 +529,7 @@ most of these functions use a file handle, not a descriptor.
 
 On file handles:
 
-  fcntl       perlfunc            IO::Handle
+  fcntl       perlfunc            ::Fcntl Fcntl.pm
   fgetpos     perlfunc/tell       IO::Seekable/getpos
   fseek       perlfunc/seek       IO::Seekable/seek
   fseeko      perlfunc/seek       IO::Seekable/seek
@@ -544,9 +544,6 @@ Using file-descriptors
   dup         perlopentut/<&=     ::FdIO/dupfd
   dup2                            ::FdIO/dup2fd
   lseek                           ::FdIO/seekfd       
-
-The symbolic constants for C<fcntl> and C<seel> are provided
-by L<Fcntl>.
 
 =head2 FIFO Interfaces
 
@@ -1153,8 +1150,8 @@ constants can be read via L<POSIX::1003::Properties>.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.94_2,
-built on May 17, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.94_3,
+built on June 10, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

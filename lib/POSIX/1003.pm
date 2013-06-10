@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003;
 use vars '$VERSION';
-$VERSION = '0.94_2';
+$VERSION = '0.94_3';
 
 
 use Carp qw/croak/;
@@ -28,6 +28,7 @@ my %tags =
   , errors =>      'POSIX::1003::Errno'
   , events =>      'POSIX::1003::Events'
   , ev =>          'POSIX::1003::Events'
+  , fcntl =>       'POSIX::1003::Fcntl'
   , fdio =>        'POSIX::1003::FdIO'
   , fd =>          'POSIX::1003::FdIO'
   , filesystem =>  'POSIX::1003::FS'

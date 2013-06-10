@@ -15,6 +15,8 @@ lib/POSIX/1003/Events.pm
 lib/POSIX/1003/Events.pod
 lib/POSIX/1003/FS.pm
 lib/POSIX/1003/FS.pod
+lib/POSIX/1003/Fcntl.pm
+lib/POSIX/1003/Fcntl.pod
 lib/POSIX/1003/FdIO.pm
 lib/POSIX/1003/FdIO.pod
 lib/POSIX/1003/Limit.pm
@@ -52,6 +54,7 @@ lib/POSIX/SigSet.pod
 lists.PL
 lists/confstr.txt
 lists/errno.txt
+lists/fcntl.txt
 lists/fdio.txt
 lists/fsys.txt
 lists/pathconf.txt
@@ -66,6 +69,7 @@ symbols.PL
 system/darwin.c
 system/hpux.c
 system/linux.c
+system/mswin32.c
 system/netware.c
 t/01use.t
 t/20math.t
@@ -80,6 +84,7 @@ t/28user.t
 t/29errno.t
 t/30sigaction.t
 t/31termios.t
+t/32fcntl.t
 t/60sysconf.t
 t/61confstr.t
 t/62pathconf.t
