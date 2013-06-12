@@ -47,6 +47,33 @@ See L<POSIX::1003::Module/"METHODS">
 See C<perlfunc fcntl>.  This raw call to C<fcntl()> is only in some
 cases simple, but often isn't.
 
+=item B<flockfd>(FD, FLAGS)
+
+Not standard POSIX, but available on many POSIX platforms.  Often
+implemented as L<fcntl()|POSIX::1003::Fcntl/"Standard POSIX">, which is more complex to use.  On other
+platforms implemented as separate OS feature.
+
+Perl core provides a C<flock> which may hide plaform differences.
+This C<flockfd> is the pure version.  Try to use L<setfd_lock()|POSIX::1003::Fcntl/"Additional">, which
+is more portable and flexible.
+
+example: 
+
+  use POSIX::1003::Fcntl ':flock';
+  if(flockfd $fd, LOCK_EX|LOCK_NB) ...
+  flockfd $fd, LOCK_UN;
+
+=item B<lockf>(FD, FLAG, LENGTH)
+
+Not standard POSIX, but available on many POSIX platforms.  Often
+implemented via L<fcntl()|POSIX::1003::Fcntl/"Standard POSIX">, which is more complex to use.
+
+example: 
+
+  use POSIX::1003::Fcntl ':lockfd';
+  if(lockf $fd, F_LOCK) ...
+  lockf $fd, F_ULOCK;
+
 =back
 
 =head2 Additional
@@ -232,23 +259,27 @@ discovered during installation of this module.
 =for comment
 #TABLE_FCNTL_START
 
-  DN_ACCESS        1              F_NOTIFY         1026
-  DN_ATTRIB        32             F_RDLCK          0
-  DN_CREATE        4              F_SETFD          2
-  DN_DELETE        8              F_SETFL          4
-  DN_MODIFY        2              F_SETLEASE       1024
-  DN_MULTISHOT     2147483648     F_SETLKW         7
-  DN_RENAME        16             F_SETOWN         8
-  F_DUPFD          0              F_SETOWN_EX      15
-  F_DUPFD_CLOEXEC  1030           F_SETPIPE_SZ     1031
-  F_GETFD          1              F_SETSIG         10
+  DN_ACCESS        1              F_SETFL          4
+  DN_ATTRIB        32             F_SETLEASE       1024
+  DN_CREATE        4              F_SETLKW         7
+  DN_DELETE        8              F_SETOWN         8
+  DN_MODIFY        2              F_SETOWN_EX      15
+  DN_MULTISHOT     2147483648     F_SETPIPE_SZ     1031
+  DN_RENAME        16             F_SETSIG         10
+  F_DUPFD          0              F_TEST           3
+  F_DUPFD_CLOEXEC  1030           F_TLOCK          2
+  F_GETFD          1              F_ULOCK          0
   F_GETFL          3              F_UNLCK          2
   F_GETLEASE       1025           F_WRLCK          1
   F_GETLK          5              FAPPEND          undef
   F_GETOWN         9              FASYNC           undef
-  F_GETOWN_EX      16             FD_CLOEXEC       undef
+  F_GETOWN_EX      16             FD_CLOEXEC       1
   F_GETPIPE_SZ     1032           FNDELAY          undef
   F_GETSIG         11             FNONBLOCK        undef
+  F_LOCK           1              LOCK_EX          undef
+  F_NOTIFY         1026           LOCK_NB          undef
+  F_RDLCK          0              LOCK_SH          undef
+  F_SETFD          2              LOCK_UN          undef
 
 
 =for comment
@@ -260,8 +291,8 @@ discovered during installation of this module.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.94_3,
-built on June 10, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.94_4,
+built on June 12, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

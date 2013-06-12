@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Fcntl;
 use vars '$VERSION';
-$VERSION = '0.94_3';
+$VERSION = '0.94_4';
 
 use base 'POSIX::1003::Module';
 
@@ -32,16 +32,24 @@ getfd_lease
 setfd_notify
 setfd_pipe_size
 getfd_pipe_size
+
+flock
+flockfd
+
+lockf
 /;
 
 our %EXPORT_TAGS =
  ( constants => \@constants
  , functions => \@functions
+ , flock     => [ qw/flock flockfd LOCK_SH LOCK_EX LOCK_UN LOCK_NB/ ] 
+ , lockf     => [ qw/lockf F_LOCK F_TLOCK F_ULOCK F_TEST/ ]
  , tables    => [ qw/%fcntl/ ]
  );
 
 our @IN_CORE  = qw/
-  fcntl/;
+fcntl
+flock/;
 
 my $fcntl;
 our %fcntl;
@@ -85,6 +93,20 @@ use constant
  , F_UNLCK      => $fcntl->{F_UNLCK}
  , F_WRLCK      => $fcntl->{F_WRLCK}
  };
+
+
+sub flockfd($$)
+{   my ($file, $flags) = @_;
+    my $fd   = ref $file ? fileno($file) : $file;
+    _flock($fd, $flags);
+}
+
+
+sub lockf($$;$)
+{   my ($file, $flags, $len) = @_;
+    my $fd   = ref $file ? fileno($file) : $file;
+    _lockf($fd, $flags, $len//0);
+}
 
 
 sub fcntl_dup($%)
