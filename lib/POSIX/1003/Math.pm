@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Math;
 use vars '$VERSION';
-$VERSION = '0.94_4';
+$VERSION = '0.94_5';
 
 use base 'POSIX::1003::Module';
 
@@ -47,7 +47,6 @@ our %EXPORT_TAGS =
   ( constants => \@constants
   , functions => \@functions
   );
-
 
 
 # the argument to be optional is important for expression priority!

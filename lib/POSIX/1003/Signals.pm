@@ -7,19 +7,13 @@ use strict;
 
 package POSIX::1003::Signals;
 use vars '$VERSION';
-$VERSION = '0.94_4';
+$VERSION = '0.94_5';
 
 use base 'POSIX::1003::Module';
 
-my @signals;
 my @states  = qw/
     SIG_BLOCK SIG_DFL SIG_ERR
     SIG_IGN SIG_SETMASK SIG_UNBLOCK
- /;
-
-my @actions = qw/
-    SA_NOCLDSTOP SA_NOCLDWAIT SA_NODEFER SA_ONSTACK SA_RESETHAND SA_RESTART
-    SA_SIGINFO
  /;
 
 my @functions = qw/
@@ -27,7 +21,8 @@ my @functions = qw/
     signal_names strsignal
  /;
 
-my @constants = (@signals, @states, @actions);
+my (@signals, @actions);
+my @constants = @states;
 
 our %EXPORT_TAGS =
   ( signals   => \@signals
@@ -46,11 +41,13 @@ our %signals;
 BEGIN {
     # initialize the :signals export tag
     $signals = signals_table;
+
     push @constants, keys %$signals;
-    push @signals,   keys %$signals;
+    push @signals, grep !/^SA_/, keys %$signals;
+    push @actions, grep /^SA_/, keys %$signals;
+
     tie %signals, 'POSIX::1003::ReadOnlyTable', $signals;
 }
-
 
 # Perl does not support pthreads, so:
 sub raise($) { CORE::kill $_[0], $$ }
@@ -62,13 +59,24 @@ sub sigprocmask($$;$) {goto &POSIX::sigprocmask }
 sub sigsuspend($)     {goto &POSIX::sigsuspend }
 sub signal($$)        { $SIG{$_[0]} = $_[1] }
 
+
 sub strsignal($)      { _strsignal($_[0]) || "Unknown signal $_[0]" }
 
 #--------------------------
 
-sub signal_names() { keys %$signals }
+sub signal_names() { @signals }
+
+
+sub sigaction_names() { @actions }
 
 #--------------------------
+
+
+sub exampleValue($)
+{   my ($class, $name) = @_;
+    my $val = $signals->{$name};
+    defined $val ? $val : 'undef';
+}
 
 
 sub _create_constant($)

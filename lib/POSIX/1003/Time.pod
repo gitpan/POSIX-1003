@@ -32,11 +32,11 @@ POSIX::1003::Time - POSIX handling time
 
 =head1 DESCRIPTION
 
-See L<documentation in base class|POSIX::1003::Module/"DESCRIPTION">.
+See L<documentation in the base class|POSIX::1003::Module/"DESCRIPTION">.
  
 =head1 METHODS
 
-See L<documentation in base class|POSIX::1003::Module/"METHODS">.
+See L<documentation in the base class|POSIX::1003::Module/"METHODS">.
  
 =over 4
 
@@ -125,6 +125,9 @@ standard (C89, to play safe).  These are C<aAbBcdHIjmMpSUwWxXyYZ%>.
 But even then, the results of some of the conversion specifiers are
 non-portable.
 
+[0.95_5] This implementation of C<strftime()> is character-set aware,
+even when the LC_TIME table does not match the type of the format string.
+
 =item B<tzname>()
 
 Returns the strings to be used to represent Standard time (STD)
@@ -151,8 +154,8 @@ Set-up local timezone from C<$ENV{TZ}> and the OS.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.94_4,
-built on June 12, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.94_5,
+built on August 21, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

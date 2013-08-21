@@ -45,11 +45,11 @@ The C<fcntl()> command has its separate module L<POSIX::1003::Fcntl|POSIX::1003:
 Locking functions are locate there as well, because they are often
 implemented via C<fcntl>.
 
-See L<documentation in base class|POSIX::1003::Module/"DESCRIPTION">.
+See L<documentation in the base class|POSIX::1003::Module/"DESCRIPTION">.
  
 =head1 METHODS
 
-See L<documentation in base class|POSIX::1003::Module/"METHODS">.
+See L<documentation in the base class|POSIX::1003::Module/"METHODS">.
  
 =over 4
 
@@ -263,8 +263,8 @@ constants, to be used with L<openfd()|POSIX::1003::FdIO/"Standard POSIX">.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.94_4,
-built on June 12, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.94_5,
+built on August 21, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

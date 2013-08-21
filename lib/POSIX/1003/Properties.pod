@@ -31,11 +31,11 @@ When you compile C/C++ programs, the header files provide you with
 a long list of C<_POSIX> constants. This module pass these values
 on to Perl.
 
-See L<documentation in base class|POSIX::1003::Module/"DESCRIPTION">.
+See L<documentation in the base class|POSIX::1003::Module/"DESCRIPTION">.
  
 =head1 METHODS
 
-See L<documentation in base class|POSIX::1003::Module/"METHODS">.
+See L<documentation in the base class|POSIX::1003::Module/"METHODS">.
  
 =over 4
 
@@ -201,8 +201,8 @@ where returned at that time.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.94_4,
-built on June 12, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.94_5,
+built on August 21, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

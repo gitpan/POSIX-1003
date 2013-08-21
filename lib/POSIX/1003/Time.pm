@@ -7,9 +7,12 @@ use strict;
 
 package POSIX::1003::Time;
 use vars '$VERSION';
-$VERSION = '0.94_4';
+$VERSION = '0.94_5';
 
 use base 'POSIX::1003::Module';
+
+use POSIX::1003::Locale  qw(setlocale LC_TIME);
+use Encode               qw(find_encoding is_utf8 decode);
 
 # Blocks resp. defined in time.h, limits.h
 my @constants = qw/
@@ -29,6 +32,28 @@ our %EXPORT_TAGS =
   ( constants => \@constants
   , functions => \@functions
   );
+
+
+sub strftime($@)
+{   my $fmt = shift;
+
+    my $lc  = setlocale LC_TIME;
+    if($lc && $lc =~ m/\.([\w-]+)/ && (my $enc = find_encoding $1))
+    {   # enforce the format string (may contain any text) to the same
+        # charset as the locale is using.
+        my $rawfmt = $enc->encode($fmt);
+        return $enc->decode(POSIX::strftime($rawfmt, @_));
+    }
+
+    if(is_utf8($fmt))
+    {   # no charset in locale, hence ascii inserts
+        my $out = POSIX::strftime(encode($fmt, 'utf8'), @_);
+        return decode $out, 'utf8';
+    }
+
+    # don't know about the charset
+    POSIX::strftime($fmt, @_);
+}
 
 
 # Everything in POSIX.xs

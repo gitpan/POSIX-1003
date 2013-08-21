@@ -22,4 +22,4 @@ requires:
   POSIX: 0
   Test::More: 0.47
   XSLoader: 0
-version: 0.94_4
+version: 0.94_5
