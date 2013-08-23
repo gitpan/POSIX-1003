@@ -4,11 +4,6 @@
 
 POSIX::1003::Limit - POSIX access to ulimit and rlimit
 
-=head1 INHERITANCE
-
- POSIX::1003::Limit
-   is a POSIX::1003::Module
-
 =head1 SYNOPSIS
 
   # ULIMIT support
@@ -48,23 +43,7 @@ This module provides access to the "ulimit" (user limit) and "rlimit"
 (resource limit) handling.  On most systems, C<ulimit()> is succeeded
 by C<rlimit()> hence provides a very limited set of features.
 
-See L<documentation in the base class|POSIX::1003::Module/"DESCRIPTION">.
- 
 =head1 METHODS
-
-See L<documentation in the base class|POSIX::1003::Module/"METHODS">.
- 
-=over 4
-
-=item POSIX::1003::Limit-E<gt>B<exampleValue>(NAME)
-
-See L<POSIX::1003::Module/"METHODS">
-
-=item $obj-E<gt>B<import>()
-
-See L<POSIX::1003::Module/"METHODS">
-
-=back
 
 =head1 FUNCTIONS
 
@@ -178,8 +157,8 @@ L<getrlimit()|POSIX::1003::Limit/"Standard POSIX"> returned during installation 
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.94_5,
-built on August 21, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.95,
+built on August 23, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

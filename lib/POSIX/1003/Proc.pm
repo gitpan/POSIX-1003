@@ -7,12 +7,15 @@ use strict;
 
 package POSIX::1003::Proc;
 use vars '$VERSION';
-$VERSION = '0.94_5';
+$VERSION = '0.95';
 
 use base 'POSIX::1003::Module';
 
 # Blocks resp. in stdlib.h, limits.h
-my @constants = qw/EXIT_FAILURE EXIT_SUCCESS CHILD_MAX /;
+my @constants = qw/
+ EXIT_FAILURE EXIT_SUCCESS CHILD_MAX
+ WNOHANG WUNTRACED
+  /;
 our @IN_CORE  = qw/wait waitpid/;
 
 # Blocks resp. in stdlib.h, sys/wait.h, unistd.h
@@ -20,7 +23,7 @@ my @functions = qw/
  abort
 
  WEXITSTATUS WIFEXITED WIFSIGNALED WIFSTOPPED
- WNOHANG WSTOPSIG WTERMSIG WUNTRACED
+ WSTOPSIG WTERMSIG 
   
  _exit pause setpgid setsid tcgetpgrp tcsetpgrp
  ctermid cuserid getcwd nice
@@ -32,6 +35,16 @@ our %EXPORT_TAGS =
  , functions => \@functions
  );
 
+
+# When the next where automatically imported from POSIX, they are
+# considered constant and therefore without parameter.  Therefore,
+# these are linked explicitly.
+*WIFEXITED   = \&POSIX::WIFEXITED;
+*WIFSIGNALED = \&POSIX::WIFSIGNALED;
+*WIFSTOPPED  = \&POSIX::WIFSTOPPED;
+*WEXITSTATUS = \&POSIX::WEXITSTATUS;
+*WTERMSIG    = \&POSIX::WTERMSIG;
+*WSTOPSIG    = \&POSIX::WSTOPSIG;
 
 #-------------------------------------
 

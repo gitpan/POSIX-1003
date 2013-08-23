@@ -434,7 +434,7 @@ See C<perlopentut> section "Open a la C".
 
   clearerr                        IO::Handle
   fclose      perlfunc/close      IO::Handle/close
-  fdopen      perlfunc/open       IO::Handle/new_from_fd
+  fdopen      perlfunc/open       ::FdIO/fdopen
   feof        perlfunc/eof        IO::Handle/eof
   ferror      perlvar/$ERRNO      IO::Handle/error     $!+0
   fflush                          IO::Handle/flush
@@ -1151,8 +1151,8 @@ constants can be read via L<POSIX::1003::Properties>.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.94_5,
-built on August 21, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.95,
+built on August 23, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

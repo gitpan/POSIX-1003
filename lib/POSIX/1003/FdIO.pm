@@ -7,14 +7,14 @@ use strict;
 
 package POSIX::1003::FdIO;
 use vars '$VERSION';
-$VERSION = '0.94_5';
+$VERSION = '0.95';
 
 use base 'POSIX::1003::Module';
 
 # Blocks resp from unistd.h, limits.h, and stdio.h
 my (@constants, @seek, @mode);
 my @functions = qw/closefd creatfd dupfd dup2fd openfd pipefd
-  readfd seekfd writefd tellfd/;
+  readfd seekfd writefd tellfd fdopen/;
 
 our %EXPORT_TAGS =
  ( constants => \@constants
@@ -56,6 +56,26 @@ sub dup2fd($$)    { goto &POSIX::dup2  }
 sub statfd($)     { goto &POSIX::fstat }
 sub creatfd($$)   { openfd $_[0], O_WRONLY()|O_CREAT()|O_TRUNC(), $_[1] }
 
+
+# This is implemented via CORE::open, because we need an Perl FH, not a
+# FILE *.
+
+sub fdopen($$)
+{   my ($fd, $mode) = @_;
+   
+    $mode =~ m/^([rwa]\+?|\<|\>|\>>)$/
+        or die "illegal fdopen() mode '$mode'\n";
+
+    my $m = $1 eq 'r' ? '<' : $1 eq 'w' ? '>' : $1 eq 'a' ? '>>' : $1;
+
+    die "fdopen() mode '$mode' (both read and write) is not supported\n"
+        if substr($m,-1) eq '+';
+
+    open my($fh), "$m&=", $fd;
+    $fh;
+}
+
+#------------------
 
 sub tellfd($)     {seekfd $_[0], 0, SEEK_CUR() }
 sub rewindfd()    {seekfd $_[0], 0, SEEK_SET() }

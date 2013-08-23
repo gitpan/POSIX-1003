@@ -39,6 +39,6 @@
          }
       }
    },
-   "release_status" : "testing",
-   "version" : "0.94_5"
+   "release_status" : "stable",
+   "version" : "0.95"
 }
