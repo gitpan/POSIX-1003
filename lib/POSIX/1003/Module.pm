@@ -7,12 +7,12 @@ use warnings;
 
 package POSIX::1003::Module;
 use vars '$VERSION';
-$VERSION = '0.95.1';
+$VERSION = '0.96';
 
 
 # The VERSION of the distribution is sourced from this file, because
 # this module also loads the XS extension.
-our $VERSION = '0.95.1';
+our $VERSION = '0.96';
 use Carp 'croak';
 
 { use XSLoader;
@@ -21,7 +21,8 @@ use Carp 'croak';
   XSLoader::load 'POSIX::1003', $VERSION;
 }
 
-my $in_constant_table = qr/
+# also used in release-test
+our $in_constant_table = qr/
    ^_CS_    # confstr
  | ^DN_     # fcntl
  | ^E(?!CHONL|XIT_) # errno   ECHONL in Termios, EXIT_ in Proc
@@ -29,6 +30,7 @@ my $in_constant_table = qr/
  | ^F_      # fcntl
  | ^FD_     # fcntl
  | ^GET_    # rlimit
+ | ^LOCK_   # fcntl
  | ^O_      # fdio
  | ^_PC_    # pathconf
  | ^POLL    # poll
@@ -144,7 +146,7 @@ sub exampleValue($)
 
 package POSIX::1003::ReadOnlyTable;
 use vars '$VERSION';
-$VERSION = '0.95.1';
+$VERSION = '0.96';
 
 sub TIEHASH($) { bless $_[1], $_[0] }
 sub FETCH($)   { $_[0]->{$_[1]} }

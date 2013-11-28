@@ -4,6 +4,11 @@
 
 POSIX::1003::Fcntl - POSIX function fcntl
 
+=head1 INHERITANCE
+
+ POSIX::1003::Fcntl
+   is a POSIX::1003::Module
+
 =head1 SYNOPSIS
 
   use POSIX::1003::Fcntl;
@@ -12,6 +17,24 @@ POSIX::1003::Fcntl - POSIX function fcntl
 
 One function, which hides many tricks with file-descriptors.  This module
 tries to provide functions which separates the various uses.
+
+See L<documentation in the base class|POSIX::1003::Module/"DESCRIPTION">.
+ 
+=head1 METHODS
+
+See L<documentation in the base class|POSIX::1003::Module/"METHODS">.
+ 
+=over 4
+
+=item POSIX::1003::Fcntl-E<gt>B<exampleValue>(NAME)
+
+See L<POSIX::1003::Module/"METHODS">
+
+=item $obj-E<gt>B<import>()
+
+See L<POSIX::1003::Module/"METHODS">
+
+=back
 
 =head1 FUNCTIONS
 
@@ -253,10 +276,10 @@ discovered during installation of this module.
   F_GETOWN_EX      16             FD_CLOEXEC       1
   F_GETPIPE_SZ     1032           FNDELAY          undef
   F_GETSIG         11             FNONBLOCK        undef
-  F_LOCK           1              LOCK_EX          undef
-  F_NOTIFY         1026           LOCK_NB          undef
-  F_RDLCK          0              LOCK_SH          undef
-  F_SETFD          2              LOCK_UN          undef
+  F_LOCK           1              LOCK_EX          2
+  F_NOTIFY         1026           LOCK_NB          4
+  F_RDLCK          0              LOCK_SH          1
+  F_SETFD          2              LOCK_UN          8
 
 
 =for comment
@@ -268,8 +291,8 @@ discovered during installation of this module.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.95.1,
-built on August 26, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.96,
+built on November 28, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

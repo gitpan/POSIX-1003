@@ -4,6 +4,11 @@
 
 POSIX::1003::Sysconf - POSIX access to sysconf()
 
+=head1 INHERITANCE
+
+ POSIX::1003::Sysconf
+   is a POSIX::1003::Module
+
 =head1 SYNOPSIS
 
   use POSIX::1003::Sysconf; # load all names
@@ -27,7 +32,23 @@ POSIX::1003::Sysconf - POSIX access to sysconf()
 The C<sysconf()> interface can be used to query system information
 in numerical form, where C<confstr()> returns strings.
 
+See L<documentation in the base class|POSIX::1003::Module/"DESCRIPTION">.
+ 
 =head1 METHODS
+
+See L<documentation in the base class|POSIX::1003::Module/"METHODS">.
+ 
+=over 4
+
+=item POSIX::1003::Sysconf-E<gt>B<exampleValue>(NAME)
+
+See L<POSIX::1003::Module/"METHODS">
+
+=item $obj-E<gt>B<import>()
+
+See L<POSIX::1003::Module/"METHODS">
+
+=back
 
 =head1 FUNCTIONS
 
@@ -98,7 +119,7 @@ where returned at that time.
   _SC_ARG_MAX                       2097152
   _SC_ASYNCHRONOUS_IO               200809
   _SC_ATEXIT_MAX                    2147483647
-  _SC_AVPHYS_PAGES                  192284
+  _SC_AVPHYS_PAGES                  136970
   _SC_BARRIERS                      200809
   _SC_BASE                          undef
   _SC_BC_BASE_MAX                   99
@@ -179,7 +200,7 @@ where returned at that time.
   _SC_PAGE_SIZE                     4096
   _SC_PAGESIZE                      4096
   _SC_PASS_MAX                      8192
-  _SC_PHYS_PAGES                    1971258
+  _SC_PHYS_PAGES                    1971256
   _SC_PII                           undef
   _SC_PII_INTERNET                  undef
   _SC_PII_INTERNET_DGRAM            undef
@@ -302,8 +323,8 @@ where returned at that time.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.95.1,
-built on August 26, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.96,
+built on November 28, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

@@ -4,6 +4,11 @@
 
 POSIX::1003::FS - POSIX for the file-system
 
+=head1 INHERITANCE
+
+ POSIX::1003::FS
+   is a POSIX::1003::Module
+
 =head1 SYNOPSIS
 
   use POSIX::1003::FS ':access';
@@ -24,6 +29,24 @@ POSIX::1003::FS - POSIX for the file-system
 
 You may also need L<POSIX::1003::Pathconf|POSIX::1003::Pathconf>.
 
+See L<documentation in the base class|POSIX::1003::Module/"DESCRIPTION">.
+ 
+=head1 METHODS
+
+See L<documentation in the base class|POSIX::1003::Module/"METHODS">.
+ 
+=over 4
+
+=item POSIX::1003::FS-E<gt>B<exampleValue>(NAME)
+
+See L<POSIX::1003::Module/"METHODS">
+
+=item $obj-E<gt>B<import>()
+
+See L<POSIX::1003::Module/"METHODS">
+
+=back
+
 =head1 FUNCTIONS
 
 =head2 Standard POSIX
@@ -40,7 +63,9 @@ Use the C<*_OK> constants for FLAGS.
 Like C<chown()>, but does not follow symlinks when encountered. Returns
 the number of files successfully changed.
 
-B<Warning>, POSIX uses different parameter order:
+B<Be Warned> that the POSIX specification uses different parameter
+order. For Perl was decided to accept a list of filenames.  Passing more
+than one filename, however, hinders correct error reporting.
 
   # POSIX specification:
   # int lchown(const char *path, uid_t owner, gid_t group);
@@ -69,15 +94,19 @@ usage information (combined in a I<minor> number).
 
 =item B<rename>(OLDNAME, NEWNAME)
 
-[0.93] This will use C<CORE::rename()>.  Be warned that Window's C<rename>
-implementation will fail when NEWNAME exists, which is not POSIX compliant.
-On many platforms, C<rename> between different partitions is not allowed.
+[0.93] Give a file or directory a new name, the basis of the UNIX C<mv>
+('move') command.  This will use C<CORE::rename()>. 
+
+B<Be warned> that Window's C<rename> implementation will fail when
+NEWNAME exists.  That behavior is not POSIX compliant.  On many platforms
+(especially the older), a C<rename> between different partitions is not
+allowed.
 
 =item B<utime>(ATIME, MTIME, FILENAMES)
 
 Simply C<CORE::utime()>
 
-B<Warning,> C<POSIX.pm> uses a different parameter order than core.
+B<Be Warned> that C<POSIX.pm> uses a different parameter order than CORE.
 
   POSIX::utime($filename, $atime, $mtime);
   CORE::utime($atime, $mtime, @filenames);
@@ -109,6 +138,8 @@ example:
 
 =item B<S_ISSOCK>(MODE)
 
+=item B<S_ISVTX>(MODE)
+
 =item B<S_ISWHT>(MODE)
 
 =item B<major>(DEVICE)
@@ -136,16 +167,17 @@ discovered during installation of this module:
 =for comment
 #TABLE_FSYS_START
 
-  F_OK          0       S_IFLNK       40960   S_ISVTX       512
-  FILENAME_MAX  4096    S_IFMT        61440   S_IWGRP       16
-  MAX_CANON     255     S_IFREG       32768   S_IWOTH       2
-  NAME_MAX      255     S_IFSOCK      49152   S_IWUSR       128
-  PATH_MAX      4096    S_IRGRP       32      S_IXGRP       8
-  R_OK          4       S_IROTH       4       S_IXOTH       1
-  S_IFBLK       24576   S_IRUSR       256     S_IXUSR       64
-  S_IFCHR       8192    S_IRWXG       56      W_OK          2
-  S_IFDIR       16384   S_IRWXO       7       X_OK          1
-  S_IFIFO       4096    S_IRWXU       448     
+  F_OK          0       S_IFMT        61440   S_ISVTX       512
+  FILENAME_MAX  4096    S_IFREG       32768   S_IWGRP       16
+  MAX_CANON     255     S_IFSOCK      49152   S_IWOTH       2
+  NAME_MAX      255     S_IRGRP       32      S_IWUSR       128
+  PATH_MAX      4096    S_IROTH       4       S_IXGRP       8
+  R_OK          4       S_IRUSR       256     S_IXOTH       1
+  S_IFBLK       24576   S_IRWXG       56      S_IXUSR       64
+  S_IFCHR       8192    S_IRWXO       7       W_OK          2
+  S_IFDIR       16384   S_IRWXU       448     X_OK          1
+  S_IFIFO       4096    S_ISGID       1024    
+  S_IFLNK       40960   S_ISUID       2048    
 
 
 =for comment
@@ -156,13 +188,16 @@ discovered during installation of this module:
 
 
 All functions and constants which start with C<S_*> can be imported
-using the C<:stat> tag, including all related C<S_IF*> functions.
-The C<*_OK> tags can be imported with C<:access> =cut
+using the C<:stat> tag, including all related C<S_IS*> functions.
+
+The C<*_OK> tags can be imported with C<:access>
+
+Permission flags get loaded with C<:perms>.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.95.1,
-built on August 26, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.96,
+built on November 28, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003::Time;
 use vars '$VERSION';
-$VERSION = '0.95.1';
+$VERSION = '0.96';
 
 use base 'POSIX::1003::Module';
 
@@ -36,6 +36,9 @@ our %EXPORT_TAGS =
 
 sub strftime($@)
 {   my $fmt = shift;
+
+#XXX See https://github.com/abeltje/lc_time for the correct implementation,
+#    using nl_langinfo(CODESET)
 
     my $lc  = setlocale LC_TIME;
     if($lc && $lc =~ m/\.([\w-]+)/ && (my $enc = find_encoding $1))

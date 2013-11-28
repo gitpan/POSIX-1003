@@ -7,16 +7,21 @@ use strict;
 
 package POSIX::1003::FS;
 use vars '$VERSION';
-$VERSION = '0.95.1';
+$VERSION = '0.96';
 
 use base 'POSIX::1003::Module';
 
 # Blocks resp from unistd.h, stdio.h, limits.h
 my @constants;
 my @access = qw/access/;
-my @stat_checks = qw/S_ISDIR S_ISCHR S_ISBLK S_ISREG S_ISFIFO
-  S_ISLNK S_ISSOCK S_ISWHT/;
-my @stat  = (qw/stat lstat/, @stat_checks);
+
+my @stat  = qw/stat lstat
+  S_ISDIR S_ISCHR S_ISBLK S_ISREG S_ISFIFO S_ISLNK S_ISSOCK S_ISWHT S_IFMT
+  S_IFBLK S_IFCHR S_IFDIR S_IFIFO S_IFLNK S_IFMT S_IFREG S_IFSOCK S_ISGID
+  S_ISUID S_ISVTX/;
+
+my @perms = qw/S_IRGRP S_IROTH S_IRUSR S_IRWXG S_IRWXO S_IRWXU
+  S_IWGRP S_IWOTH S_IWUSR S_IXGRP S_IXOTH S_IXUSR/;
 
 sub S_ISDIR($)  { ($_[0] & S_IFMT()) == S_IFDIR()}
 sub S_ISCHR($)  { ($_[0] & S_IFMT()) == S_IFCHR()}
@@ -45,6 +50,7 @@ our %EXPORT_TAGS =
  , access    => \@access
  , stat      => \@stat
  , tables    => [ qw/%access %stat/ ]
+ , perms     => \@perms
  );
 
 my ($fsys, %access, %stat);

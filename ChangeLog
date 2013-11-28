@@ -11,6 +11,22 @@ All changes are made by Mark Overmeer, unless stated otherwise.
 # . add (bsd_)glob with its many flags
 # . add POSIX::RT::Semaphore logic?
 # . cleanup exampleValue()
+# . charset of $!  strerror()  perl#119499
+
+# . implementation of nl_langinfo
+# . change in ::Module of detection of constants which need autogeneration
+# . charset of locale only via nl_langinfo(CODESET)
+
+version 0.96: Thu Nov 28 14:47:55 CET 2013
+	Fixes:
+	- LOCK_* did not get defined.
+
+	Improvements:
+	- add ::FdIO::truncfd()
+	- POSIX::1003 now also knows the EXPORT_TAGS of each of the
+	  packages, like :stat and :perms
+	- add ::FS::S_ISUID, S_ISGID, S_ISVTX
+	- add ::FS export tag :perms
 
 version 0.95.1: Mon Aug 26 13:16:28 CEST 2013
 	Fixes:

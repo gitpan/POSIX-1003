@@ -7,14 +7,14 @@ use strict;
 
 package POSIX::1003::FdIO;
 use vars '$VERSION';
-$VERSION = '0.95.1';
+$VERSION = '0.96';
 
 use base 'POSIX::1003::Module';
 
 # Blocks resp from unistd.h, limits.h, and stdio.h
 my (@constants, @seek, @mode);
 my @functions = qw/closefd creatfd dupfd dup2fd openfd pipefd
-  readfd seekfd writefd tellfd fdopen/;
+  readfd seekfd writefd tellfd truncfd fdopen/;
 
 our %EXPORT_TAGS =
  ( constants => \@constants
@@ -74,6 +74,7 @@ sub fdopen($$)
     open my($fh), "$m&=", $fd;
     $fh;
 }
+
 
 #------------------
 

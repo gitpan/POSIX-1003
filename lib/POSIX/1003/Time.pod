@@ -4,6 +4,11 @@
 
 POSIX::1003::Time - POSIX handling time
 
+=head1 INHERITANCE
+
+ POSIX::1003::Time
+   is a POSIX::1003::Module
+
 =head1 SYNOPSIS
 
   use POSIX::1003::Time;
@@ -26,6 +31,24 @@ POSIX::1003::Time - POSIX handling time
   $timespan  = difftime($end, $begin);
 
 =head1 DESCRIPTION
+
+See L<documentation in the base class|POSIX::1003::Module/"DESCRIPTION">.
+ 
+=head1 METHODS
+
+See L<documentation in the base class|POSIX::1003::Module/"METHODS">.
+ 
+=over 4
+
+=item POSIX::1003::Time-E<gt>B<exampleValue>(NAME)
+
+See L<POSIX::1003::Module/"METHODS">
+
+=item $obj-E<gt>B<import>()
+
+See L<POSIX::1003::Module/"METHODS">
+
+=back
 
 =head1 FUNCTIONS
 
@@ -131,8 +154,8 @@ Set-up local timezone from C<$ENV{TZ}> and the OS.
 
 =head1 SEE ALSO
 
-This module is part of POSIX-1003 distribution version 0.95.1,
-built on August 26, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
+This module is part of POSIX-1003 distribution version 0.96,
+built on November 28, 2013. Website: F<http://perl.overmeer.net>.  The code is based on L<POSIX>, which
 is released with Perl itself.  See also L<POSIX::Util> for
 additional functionality.
 

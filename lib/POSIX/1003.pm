@@ -7,7 +7,7 @@ use strict;
 
 package POSIX::1003;
 use vars '$VERSION';
-$VERSION = '0.95.1';
+$VERSION = '0.96';
 
 
 use Carp qw/croak/;
@@ -18,7 +18,7 @@ my %own_functions = map +($_ => 1), qw/
   show_posix_names
  /;
 
-our (%EXPORT_TAGS, %IMPORT_FROM);
+our (%EXPORT_TAGS, %IMPORT_FROM, %SUBSET);
 
 
 my %tags =
@@ -85,13 +85,13 @@ sub _tags()     { keys %tags}
 
 sub import(@)
 {   my $class = shift;
-    my (%mods, %from);
+    my (%mods, %modset, %from);
 
     my $level = @_ && $_[0] =~ /^\+(\d+)$/ ? shift : 0;
     return if @_==1 && $_[0] eq ':none';
     @_ = ':all' if !@_;
 
-    no strict 'refs';
+    no strict   'refs';
     no warnings 'once';
     my $to    = (caller $level)[0];
 
@@ -101,8 +101,14 @@ sub import(@)
             *{$to.'::'.$_} = \&$_ for keys %own_functions;
         }
         elsif(m/^\:(.*)/)
-        {   exists $tags{$1} or croak "unknown tag '$_'";
-            $mods{$_}++ for map $mod_tag{$_}, _tag2mods $1;  # remove aliases
+        {   if(exists $tags{$1})
+            {   # module by longest alias
+                $mods{$_}++ for map $mod_tag{$_}, _tag2mods $1;
+            }
+            elsif(my $subset = $SUBSET{$1})
+            {   push @{$modset{$subset}}, $1;
+            }
+            else { croak "unknown tag '$_'" };
         }
         elsif($own_functions{$_})
         {   *{$to.'::'.$_} = \&$_;
@@ -121,9 +127,20 @@ sub import(@)
 
     my $up = '+' . ($level+1);
     foreach my $tag (keys %mods)     # whole tags
-    {   foreach my $pkg (_tag2mods($tag))
+    {   delete $modset{$tag};
+        delete $from{$tag};
+        foreach my $pkg (_tag2mods($tag))
         {   eval "require $pkg"; die $@ if $@;
             $pkg->import($up, ':all');
+        }
+    }
+    foreach my $tag (keys %modset)
+    {   foreach my $pkg (_tag2mods($tag))
+        {   eval "require $pkg"; die $@ if $@;
+            my @subsets = @{$modset{$tag}};
+            my $et = \%{"$pkg\::EXPORT_TAGS"};
+            $pkg->import($up, @{$et->{$_}})
+               for @subsets;
         }
     }
     foreach my $tag (keys %from)     # separate symbols
