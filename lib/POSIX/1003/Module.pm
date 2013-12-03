@@ -7,12 +7,12 @@ use warnings;
 
 package POSIX::1003::Module;
 use vars '$VERSION';
-$VERSION = '0.97';
+$VERSION = '0.98';
 
 
 # The VERSION of the distribution is sourced from this file, because
 # this module also loads the XS extension.
-our $VERSION = '0.97';
+our $VERSION = '0.98';
 use Carp 'croak';
 
 { use XSLoader;
@@ -146,7 +146,7 @@ sub exampleValue($)
 
 package POSIX::1003::ReadOnlyTable;
 use vars '$VERSION';
-$VERSION = '0.97';
+$VERSION = '0.98';
 
 sub TIEHASH($) { bless $_[1], $_[0] }
 sub FETCH($)   { $_[0]->{$_[1]} }
